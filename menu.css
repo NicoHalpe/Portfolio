@@ -1,0 +1,139 @@
+.menu {
+	height: 460px;
+	width: 430px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu .social {
+	position: absolute;
+	list-style: none;
+	transition: 0.5s;
+	transition-delay: calc(0.05s * var(--i));
+	transform: rotate(0deg);
+}
+
+.menu .social a {
+	height: 60px;
+	width: 60px;
+}
+
+.menu.active .social {
+	transform: rotate(calc(360deg / 6 * var(--i))) translateX(-200px)
+		rotate(calc(360deg / -6 * var(--i))) translateY(10px)
+		rotate(calc(360deg / 6 * var(--i)));
+}
+
+.menu .social svg {
+	--iconsize: 50px;
+	transform: rotate(calc(360deg / -6 * var(--i)));
+	color: #262e33;
+	background-color: #65c9ff;
+	padding: 8px;
+	border-radius: 50%;
+	transition: 0.5s;
+}
+.menu .social:hover svg {
+	--iconsize: 55px;
+}
+
+.toggle {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	border-radius: 50%;
+	transition: 1.25s;
+}
+
+@media only screen and (max-width: 1300px) and (orientation: landscape) {
+	.menu .social svg {
+		--iconsize: 35px;
+	}
+	.menu.active .social {
+		transform: rotate(calc(360deg / 6 * var(--i))) translateX(-140px)
+			rotate(calc(360deg / -6 * var(--i))) translateY(10px)
+			rotate(calc(360deg / 6 * var(--i)));
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.menu .social svg {
+		--iconsize: 40px;
+	}
+
+	.menu.active .social {
+		transform: rotate(calc(360deg / 6 * var(--i))) translateX(-180px)
+			rotate(calc(360deg / -6 * var(--i))) translateY(10px)
+			rotate(calc(360deg / 6 * var(--i)));
+	}
+}
+
+@media only screen and (max-height: 850px) {
+	.menu {
+		height: 320px;
+		width: 250px;
+		margin-top: 20px;
+	}
+
+	.menu .social svg {
+		--iconsize: 30px;
+	}
+
+	.menu .social:hover svg {
+		--iconsize: 35px;
+	}
+
+	.menu.active .social {
+		transform: rotate(calc(360deg / 6 * var(--i))) translateX(-140px)
+			rotate(calc(360deg / -6 * var(--i))) translateY(10px)
+			rotate(calc(360deg / 6 * var(--i)));
+	}
+}
+
+@media only screen and (max-height: 700px) {
+	.menu {
+		height: 320px;
+		width: 250px;
+		margin-top: 20px;
+	}
+
+	.menu .social svg {
+		--iconsize: 30px;
+	}
+
+	.menu .social:hover svg {
+		--iconsize: 35px;
+	}
+
+	.menu.active .social {
+		transform: rotate(calc(360deg / 6 * var(--i))) translateX(-130px)
+			rotate(calc(360deg / -6 * var(--i))) translateY(10px)
+			rotate(calc(360deg / 6 * var(--i)));
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.menu {
+		height: 320px;
+		width: 250px;
+		margin-top: 20px;
+	}
+
+	.menu .social svg {
+		--iconsize: 30px;
+	}
+
+	.menu .social:hover svg {
+		--iconsize: 35px;
+	}
+
+	.menu.active .social {
+		transform: rotate(calc(360deg / 6 * var(--i))) translateX(-140px)
+			rotate(calc(360deg / -6 * var(--i))) translateY(10px)
+			rotate(calc(360deg / 6 * var(--i)));
+	}
+}
