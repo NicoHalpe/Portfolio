@@ -18,7 +18,7 @@ class TxtType {
 			this.txt = fullTxt.substring(0, this.txt.length + 1);
 		}
 
-		this.el.innerHTML = '<span class="wrap">&#8205;' + this.txt + "</span>";
+		this.el.innerHTML = '<h1 class="wrap">&#8205;' + this.txt + "</h1>";
 
 		var that = this;
 		var delta = 150 - Math.random() * 100;
