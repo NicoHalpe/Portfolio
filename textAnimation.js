@@ -42,30 +42,27 @@ class TxtType {
 	}
 }
 
-window.onload = function () {
-	setTimeout(function () {
-		var elements = document.getElementsByClassName("typewrite");
-		for (var i = 0; i < elements.length; i++) {
-			var toRotate = elements[i].getAttribute("data-type");
-			var period = elements[i].getAttribute("data-period");
-			if (toRotate) {
-				new TxtType(elements[i], JSON.parse(toRotate), period);
-			}
+setTimeout(function () {
+	var elements = document.getElementsByClassName("typewrite");
+	for (var i = 0; i < elements.length; i++) {
+		var toRotate = elements[i].getAttribute("data-type");
+		var period = elements[i].getAttribute("data-period");
+		if (toRotate) {
+			new TxtType(elements[i], JSON.parse(toRotate), period);
 		}
-	}, 1500);
+	}
+}, 1000);
 
-	var css = document.createElement("style");
-	css.type = "text/css";
-	css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-	let state = true;
+var css = document.createElement("style");
+css.type = "text/css";
+css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+let state = true;
+state = !state;
+setInterval(() => {
+	state
+		? (css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}")
+		: (css.innerHTML =
+				".typewrite > .wrap { border-right: 0.08em solid rgba(255, 255, 255, 0) }");
 	state = !state;
-	setInterval(() => {
-		state
-			? (css.innerHTML =
-					".typewrite > .wrap { border-right: 0.08em solid #fff}")
-			: (css.innerHTML =
-					".typewrite > .wrap { border-right: 0.08em solid rgba(255, 255, 255, 0) }");
-		state = !state;
-	}, 400);
-	document.body.appendChild(css);
-};
+}, 400);
+document.body.appendChild(css);
