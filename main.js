@@ -34,6 +34,23 @@ document.querySelectorAll("a").forEach((el) => {
 	});
 });
 
+document.querySelector("form").addEventListener("submit", handleSubmit);
+
+const handleSubmit = (e) => {
+	e.preventDefault();
+	let myForm = document.getElementById("pizzaOrder");
+	let formData = new FormData(myForm);
+	fetch("/", {
+		method: "POST",
+		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		body: new URLSearchParams(formData).toString(),
+	})
+		.then(() => {
+			document.querySelector("form").reset();
+			alert("Gracias por tu mensaje!");
+		})
+		.catch((error) => alert(error));
+};
 
 //#region Registrar el Service Worker (PWA)
 
