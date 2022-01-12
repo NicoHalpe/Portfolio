@@ -1,8 +1,4 @@
-@font-face {
-	font-family: "Rubik";
-	src: url("/Rubik.ttf");
-	font-display: swap;
-}
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 
 @keyframes rubberBand {
 	0% {
