@@ -1,6 +1,6 @@
 var observer = new IntersectionObserver(onIntersection, {
 	root: null,
-	threshold: 0.4,
+	rootMargin: "-150px",
 });
 
 function onIntersection(entries, opts) {
@@ -23,16 +23,6 @@ document.querySelectorAll("a").forEach((el) => {
 			document.querySelector(href).scrollIntoView();
 		}
 	});
-});
-
-[...document.querySelectorAll("#me .content h1 span")].map((el, i) => {
-	el.style.setProperty("animation-delay", `${i * 50}ms`, "");
-	el.classList.add("loading");
-	setTimeout(() => {
-		el.classList.remove("loading");
-		el.classList.add("loaded");
-		el.style.setProperty("animation-delay", "", "");
-	}, 750 + i * 50);
 });
 
 document.querySelectorAll(".spanText span:not(.blank)").forEach((el) => {
@@ -68,6 +58,18 @@ const handleSubmit = (e) => {
 };
 
 document.querySelector("form").addEventListener("submit", handleSubmit);
+
+[...document.querySelectorAll("#me .content h1 span")].map((el, i) => {
+	el.style.setProperty("animation-delay", `${i * 50}ms`, "");
+	el.classList.add("bounceIn");
+	el.addEventListener("animationend", (e) => {
+		if (e.animationName === "bounceIn") {
+			el.style.setProperty("opacity", "1", "");
+			el.classList.remove("bounceIn");
+			el.style.setProperty("animation-delay", "", "");
+		}
+	});
+});
 
 //#region Registrar el Service Worker (PWA)
 
