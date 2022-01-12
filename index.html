@@ -17,7 +17,8 @@
 		<meta name="og:description" content="Soy Nicolas Halperin, Full stack developer y Software developer. Estudiante en la escuela ORT Argentina. Este es mi potafolio." />
 
 		<link rel="canonical" href="https://nicohalpe.com.ar/" />
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="style.css"/>
+		<script src="main.js" defer></script>
 
 		<link rel="shortcut icon" href="img/avatar.svg" type="image/x-icon" />
 		<link rel="manifest" href="manifest.json" />
@@ -27,151 +28,207 @@
 		<title>Nicolas Halperin</title>
 	</head>
 	<body>
-		<div class="main-content">
-			<div class="me">
-				<div class="text-wrapper">
-					<span>Hola, soy </span>
-					<span class="typewrite" data-period="2000" data-type='[ "Nico", "Full Stack Developer", "Software Developer", "Back-end Developer", "Front-end Developer" ]'>
-						<h1 class="wrap">Nico</h1>
-					</span>
-				</div>
-				<span class="subtitle">Automatizando el mundo</span>
+		<section id="me">
+			<div class="content">
+				<h1 class="spanText" aria-label="Hola, Soy Nico, Full Stack Developer">
+					<span>H</span>
+					<span>o</span>
+					<span>l</span>
+					<span>a</span>
+					<span>,</span>
+					<br />
+					<span>S</span>
+					<span>o</span>
+					<span>y</span>
+					<span class="blank"> </span>
+					<span>N</span>
+					<span>i</span>
+					<span>c</span>
+					<span>o</span>
+					<span>,</span>
+					<br />
+					<span>F</span>
+					<span>u</span>
+					<span>l</span>
+					<span>l</span>
+					<span class="blank"> </span>
+					<span>S</span>
+					<span>t</span>
+					<span>a</span>
+					<span>c</span>
+					<span>k</span>
+					<span class="blank"> </span>
+					<span>D</span>
+					<span>e</span>
+					<span>v</span>
+					<span>e</span>
+					<span>l</span>
+					<span>o</span>
+					<span>p</span>
+					<span>e</span>
+					<span>r</span>
+				</h1>
+				<p>Automatizando el mundo</p>
+				<a href="#contact">Contactame</a>
 			</div>
-			<div class="menu">
-				<div class="toggle">
-					<img src="img/avatar.svg" alt="nicolas halperin" title="nicolas halperin" width="300px" height="300px" class="avatar" />
-				</div>
-				<div class="social" style="--i: 0">
-					<a href="https://www.instagram.com/nico_halpe/" target="_blank" rel="noopener nofollow" title="Instagram @nico_halpe">
-						<svg style="width: var(--iconsize); height: var(--iconsize)" viewBox="0 0 24 24">
-							<path
-								fill="currentColor"
-								d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"
-							/>
-						</svg>
-					</a>
-				</div>
-				<div class="social" style="--i: 1">
-					<a href="https://www.linkedin.com/in/nicolas-halperin/" rel="noopener nofollow" target="_blank" title="Linkedin nicolas halperin">
-						<svg style="width: var(--iconsize); height: var(--iconsize)" viewBox="0 0 24 24">
-							<path
-								fill="currentColor"
-								d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"
-							/>
-						</svg>
-					</a>
-				</div>
-				<div class="social" style="--i: 2">
-					<a href="https://github.com/NicoHalpe" target="_blank" rel="noopener nofollow" title="Github NicoHalpe">
-						<svg style="width: var(--iconsize); height: var(--iconsize)" viewBox="0 0 24 24">
-							<path
-								fill="currentColor"
-								d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
-							/>
-						</svg>
-					</a>
-				</div>
-				<div class="social" style="--i: 3">
-					<a href="mailto:nicohalpe05@gmail.com" target="_blank" rel="noopener nofollow" title="Mail nicohalpe05@gmail.com">
-						<svg style="width: var(--iconsize); height: var(--iconsize)" viewBox="0 0 24 24">
-							<path fill="currentColor" d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z" />
-						</svg>
-					</a>
-				</div>
-				<div class="social" style="--i: 4">
-					<a href="https://discord.com/users/463392417782038569" target="_blank" rel="noopener nofollow" title="Discord Halpe#9999">
-						<svg style="width: var(--iconsize); height: var(--iconsize)" viewBox="-6 -12 80 80">
-							<path
-								d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"
-								stroke="#FF0000"
-								stroke-width="0.1"
-								fill="currentColor"
-							/>
-						</svg>
-					</a>
-				</div>
-				<div class="social" style="--i: 5">
-					<a href="https://www.facebook.com/nico.halperin.7" target="_blank" rel="noopener nofollow" title="Facebook nico halperin">
-						<svg style="width: var(--iconsize); height: var(--iconsize)" viewBox="0 0 24 24">
-							<path
-								fill="currentColor"
-								d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"
-							/>
-						</svg>
-					</a>
-				</div>
+			<img width="300" height="300" src="img/avatar.svg" alt="nicolas halperin" />
+		</section>
+		<section id="about">
+			<img width="300" height="300" src="img/programming.png" alt="programming" />
+			<div class="content">
+				<h2 class="spanText" aria-label="Sobre Mí">
+					<span>S</span>
+					<span>o</span>
+					<span>b</span>
+					<span>r</span>
+					<span>e</span>
+					<span class="blank"> </span>
+					<span>M</span>
+					<span>í</span>
+				</h2>
+				<p>
+					Me llamo Nicolas Halperin, desde hace 3 años me estoy adentrando en el mundo de la progromación y el desarrollo. Estoy en constante desarrollo de proyectos y me encanta lo que hago. A pesar
+					del poco tiempo que llevo, he aprendido mucho. Actualmente me encuentro en estudios secundarios, siguiendo la orientación de Tecnologías de la Información y la Comunicación en la escuela
+					ORT.
+				</p>
 			</div>
-			<img src="img/programming.svg" alt="decoracion" title="decoracion" width="700px" height="285px" class="programming-svg" />
-		</div>
-		<div class="second-content">
-			<h1>Soy Nico, ¿Qué tal?</h1>
-			<h2 class="description">
-				Me llamo Nicolas Halperin, desde hace 3 años me estoy adentrando en el mundo de la progromación y el desarrollo. Estoy en constante desarrollo de proyectos y me encanta lo que hago. A pesar
-				del poco tiempo que llevo, he aprendido mucho. Actualmente me encuentro en estudios secundarios, siguiendo la orientación de Tecnologías de la Información y la Comunicación en la escuela ORT.
+		</section>
+		<section id="skills">
+			<h2 class="spanText" aria-label="Habilidades">
+				<span>H</span>
+				<span>a</span>
+				<span>b</span>
+				<span>i</span>
+				<span>l</span>
+				<span>i</span>
+				<span>d</span>
+				<span>a</span>
+				<span>d</span>
+				<span>e</span>
+				<span>s</span>
 			</h2>
+			<div class="cards">
+				<div class="card">
+					<div class="header">
+						<img src="img/back.svg" alt="back end logo" title="back end logo" height="52px" width="52px" class="card-icon" />
+						<h3>Back-end Developer</h3>
+					</div>
 
-			<div class="skills show-on-scroll">
-				<div class="back card">
-					<img src="img/back.svg" alt="back end logo" title="back end logo" height="52px" width="52px" class="card-icon" />
-					<h2>Back-end Developer</h2>
+					<div class="languages">
+						<h4>Lenguajes</h4>
+						<p>Python, Javascript</p>
+					</div>
 
-					<h3>Lenguajes</h3>
-					<p>Python, Javascript</p>
-
-					<h3>Herramientas</h3>
-					<ul>
-						<li>Visual Studio Code</li>
-						<li>Node.js</li>
-						<li>Express</li>
-						<li>Flask</li>
-						<li>Postman</li>
-						<li>Heroku</li>
-						<li>Github</li>
-					</ul>
+					<div class="tools">
+						<h4>Herramientas</h4>
+						<ul>
+							<li>Visual Studio Code</li>
+							<li>Node.js</li>
+							<li>Express</li>
+							<li>Flask</li>
+							<li>Postman</li>
+							<li>Heroku</li>
+							<li>Github</li>
+						</ul>
+					</div>
 				</div>
-				<div class="front card">
-					<img src="img/front.svg" alt="front end logo" title="front end logo" height="52px" width="52px" class="card-icon" />
-					<h2>Front-end Developer</h2>
+				<div class="card">
+					<div class="header">
+						<img src="img/front.svg" alt="front end logo" title="front end logo" height="52px" width="52px" class="card-icon" />
+						<h3>Front-end Developer</h3>
+					</div>
 
-					<h3>Lenguajes</h3>
-					<p>HTML, CSS</p>
+					<div class="languages">
+						<h4>Lenguajes</h4>
+						<p>HTML, CSS</p>
+					</div>
 
-					<h3>Herramientas</h3>
-					<ul>
-						<li>Visual Studio Code</li>
-						<li>Bootsrap</li>
-						<li>Materialize</li>
-						<li>Material-UI</li>
-						<li>ReactJS</li>
-						<li>JQuery</li>
-						<li>Figma</li>
-						<li>Github</li>
-					</ul>
+					<div class="tools">
+						<h4>Herramientas</h4>
+						<ul>
+							<li>Visual Studio Code</li>
+							<li>Bootsrap</li>
+							<li>Materialize</li>
+							<li>Material-UI</li>
+							<li>ReactJS</li>
+							<li>JQuery</li>
+							<li>Figma</li>
+							<li>Github</li>
+						</ul>
+					</div>
 				</div>
-				<div class="soft card">
-					<img src="img/software.svg" alt="software logo" title="software logo" height="52px" width="52px" class="card-icon" />
-					<h2>Software Developer</h2>
+				<div class="card">
+					<div class="header">
+						<img src="img/software.svg" alt="software logo" title="software logo" height="52px" width="52px" class="card-icon" />
+						<h3>Software Developer</h3>
+					</div>
 
-					<h3>Lenguajes</h3>
-					<p>Dart, Kotlin, Java, C#, Javascript</p>
+					<div class="languages">
+						<h4>Lenguajes</h4>
+						<p>Dart, Kotlin, Java, C#, Javascript</p>
+					</div>
 
-					<h3>Herramientas</h3>
-					<ul>
-						<li>Visual Studio Code</li>
-						<li>Visual Studio</li>
-						<li>Android Studio</li>
-						<li>Flutter</li>
-						<li>Electron</li>
-						<li>Windows Presentations Framework</li>
-						<li>Github</li>
-					</ul>
+					<div class="tools">
+						<h4>Herramientas</h4>
+						<ul>
+							<li>Visual Studio Code</li>
+							<li>Visual Studio</li>
+							<li>Android Studio</li>
+							<li>Flutter</li>
+							<li>Electron</li>
+							<li>Windows Presentations Framework</li>
+							<li>Github</li>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-
-		<div class="footer"></div>
-
-		<script src="main.js"></script>
-		<script src="textAnimation.js" defer></script>
+		</section>
+		<section id="contact">
+			<h2 class="spanText" aria-label="Contactame">
+				<span>C</span>
+				<span>o</span>
+				<span>n</span>
+				<span>t</span>
+				<span>a</span>
+				<span>c</span>
+				<span>t</span>
+				<span>a</span>
+				<span>m</span>
+				<span>e</span>
+			</h2>
+			<div class="content">
+				<div class="form">
+					<div class="col">
+						<input placeholder="Nombre" type="text" name="nombre" id="nombre" />
+						<input placeholder="Email" type="email" name="email" id="email" />
+					</div>
+					<input placeholder="Asunto" type="text" name="asunto" id="asunto" />
+					<textarea placeholder="Mensaje" name="mensaje" id="mensaje" rows="8"></textarea>
+					<button onclick="alert('Todavía no anda :(')">¡Enviar!</button>
+				</div>
+				<div class="socials">
+					<a href="https://github.com/NicoHalpe" class="row">
+						<img width="50" height="50" src="img/github.svg" alt="github nicohalpe" />
+						<span>NicoHalpe</span>
+					</a>
+					<a href="https://discord.com/users/463392417782038569" class="row">
+						<img width="50" height="50" src="img/discord.svg" alt="discord halpe#9999" />
+						<span>Halpe#9999</span>
+					</a>
+					<a href="https://www.instagram.com/nico_halpe/" class="row">
+						<img width="50" height="50" src="img/instagram.svg" alt="instagram nico_halpe" />
+						<span>nico_halpe</span>
+					</a>
+					<a href="https://www.linkedin.com/in/nicolas-halperin/" class="row">
+						<img width="50" height="50" src="img/linkedin.svg" alt="linkedin nicolas halperin" />
+						<span>Nicolas Halperin</span>
+					</a>
+					<a href="mailto:nicohalpe05@gmail.com" class="row">
+						<img width="50" height="50" src="img/mail.svg" alt="mail nicohalpe05@gmail.com" />
+						<span>nicohalpe05@gmail.com</span>
+					</a>
+				</div>
+			</div>
+		</section>
 	</body>
 </html>
