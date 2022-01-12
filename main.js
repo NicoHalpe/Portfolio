@@ -36,15 +36,15 @@ document.querySelectorAll("a").forEach((el) => {
 
 const handleSubmit = (e) => {
 	e.preventDefault();
-	let myForm = document.getElementById("pizzaOrder");
-	let formData = new FormData(myForm);
+	let form = document.getElementById("contact-form");
+	let formData = new FormData(form);
 	fetch("/", {
 		method: "POST",
 		headers: { "Content-Type": "application/x-www-form-urlencoded" },
 		body: new URLSearchParams(formData).toString(),
 	})
 		.then(() => {
-			document.querySelector("form").reset();
+			form.reset();
 			alert("Gracias por tu mensaje!");
 		})
 		.catch((error) => alert(error));
