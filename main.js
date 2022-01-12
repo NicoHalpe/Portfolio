@@ -34,8 +34,6 @@ document.querySelectorAll("a").forEach((el) => {
 	});
 });
 
-document.querySelector("form").addEventListener("submit", handleSubmit);
-
 const handleSubmit = (e) => {
 	e.preventDefault();
 	let myForm = document.getElementById("pizzaOrder");
@@ -51,6 +49,8 @@ const handleSubmit = (e) => {
 		})
 		.catch((error) => alert(error));
 };
+
+document.querySelector("form").addEventListener("submit", handleSubmit);
 
 //#region Registrar el Service Worker (PWA)
 
