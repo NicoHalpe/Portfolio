@@ -14,7 +14,6 @@ var observer = new IntersectionObserver(onIntersection, {
 
 function onIntersection(entries, opts) {
 	entries.forEach((entry) => {
-		console.log(entry);
 		if (entry.isIntersecting) {
 			entry.target.classList.add("visible");
 			observer.unobserve(entry.target);

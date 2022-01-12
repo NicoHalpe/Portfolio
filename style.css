@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@font-face {
+	font-family: "Rubik";
+	src: url("/Rubik.ttf");
+	font-display: swap;
+}
 
 @keyframes rubberBand {
 	0% {
@@ -69,9 +73,9 @@
 	from {
 		opacity: 1;
 	}
-    100% {
-        visibility: collapse;
-    }
+	100% {
+		visibility: collapse;
+	}
 	to {
 		opacity: 0;
 		transform: translateY(20vw);
@@ -81,7 +85,7 @@
 * {
 	margin: 0;
 	padding: 0;
-	font-family: "Rubik";
+	font-family: "Rubik", sans-serif;
 	scroll-behavior: smooth;
 }
 
@@ -386,31 +390,31 @@ section {
 	width: 100%;
 	font-size: clamp(1rem, 2.5vw, 1.4rem);
 	visibility: collapse;
-    left: 0;
-    display: grid;
-    place-items: center;
+	left: 0;
+	display: grid;
+	place-items: center;
 }
 
 #contact .form-submit {
 	width: 40%;
-    height: 4vh;
-    background-color: #d4edda;
+	height: 4vh;
+	background-color: #d4edda;
 	color: #155724;
 	border: 1px solid #c3e6cb;
-    display: flex;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 5px;
 }
 
 #contact .form-submit-wrapper.leave {
-    visibility: visible;
-	animation: leave .8s ease-out;
+	visibility: visible;
+	animation: leave 0.8s ease-out;
 }
 
 #contact .form-submit-wrapper.visible {
 	visibility: visible;
-	animation: enter-bottom .8s ease-out;
+	animation: enter-bottom 0.8s ease-out;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -471,17 +475,17 @@ section {
 		width: 100%;
 	}
 
-    #contact .form-submit {
-        width: 80%;
-        height: 4vh;
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 5px;
-    }
+	#contact .form-submit {
+		width: 80%;
+		height: 4vh;
+		background-color: #d4edda;
+		color: #155724;
+		border: 1px solid #c3e6cb;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 5px;
+	}
 }
 
 *::-webkit-scrollbar {
