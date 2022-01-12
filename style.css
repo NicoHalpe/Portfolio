@@ -65,6 +65,18 @@
 		opacity: inherit;
 	}
 }
+@keyframes leave {
+	from {
+		opacity: 1;
+	}
+    100% {
+        visibility: collapse;
+    }
+	to {
+		opacity: 0;
+		transform: translateY(20vw);
+	}
+}
 
 * {
 	margin: 0;
@@ -143,7 +155,7 @@ section {
 
 #me img {
 	width: 30%;
-    height: auto;
+	height: auto;
 	animation: enter-right 0.8s ease-in-out;
 }
 
@@ -185,7 +197,7 @@ section {
 #about img {
 	visibility: hidden;
 	width: 30%;
-    height: auto;
+	height: auto;
 }
 
 #skills {
@@ -368,6 +380,39 @@ section {
 	width: clamp(30px, 5vw, 50px);
 }
 
+#contact .form-submit-wrapper {
+	position: fixed;
+	bottom: 3vh;
+	width: 100%;
+	font-size: clamp(1rem, 2.5vw, 1.4rem);
+	visibility: collapse;
+    left: 0;
+    display: grid;
+    place-items: center;
+}
+
+#contact .form-submit {
+	width: 40%;
+    height: 4vh;
+    background-color: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+}
+
+#contact .form-submit-wrapper.leave {
+    visibility: visible;
+	animation: leave .8s ease-out;
+}
+
+#contact .form-submit-wrapper.visible {
+	visibility: visible;
+	animation: enter-bottom .8s ease-out;
+}
+
 @media only screen and (max-width: 1000px) {
 	section {
 		min-height: 100vh;
@@ -425,6 +470,18 @@ section {
 	#contact .form {
 		width: 100%;
 	}
+
+    #contact .form-submit {
+        width: 80%;
+        height: 4vh;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+    }
 }
 
 *::-webkit-scrollbar {

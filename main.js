@@ -14,6 +14,7 @@ var observer = new IntersectionObserver(onIntersection, {
 
 function onIntersection(entries, opts) {
 	entries.forEach((entry) => {
+		console.log(entry);
 		if (entry.isIntersecting) {
 			entry.target.classList.add("visible");
 			observer.unobserve(entry.target);
@@ -45,7 +46,14 @@ const handleSubmit = (e) => {
 	})
 		.then(() => {
 			form.reset();
-			alert("Gracias por tu mensaje!");
+			document.querySelector(".form-submit-wrapper").classList.add("visible");
+			setTimeout(() => {
+				document.querySelector(".form-submit-wrapper").classList.remove("visible");
+				document.querySelector(".form-submit-wrapper").classList.add("leave");
+				setTimeout(() => {
+					document.querySelector(".form-submit-wrapper").classList.remove("leave");
+				}, 800);
+			}, 3000);
 		})
 		.catch((error) => alert(error));
 };
