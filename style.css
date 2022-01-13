@@ -116,7 +116,7 @@ html, body {
 }
 
 section {
-	height: 100vh;
+	min-height: 100vh;
 	background-color: #1d1d1d;
 	color: white;
 	padding: 2vh 6vw;
