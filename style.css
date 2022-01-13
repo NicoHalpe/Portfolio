@@ -97,6 +97,10 @@
 	scroll-behavior: smooth;
 }
 
+#hoverelement {
+	position: fixed;
+}
+
 html, body {
 	overflow-x: hidden;
 }

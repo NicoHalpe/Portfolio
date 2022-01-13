@@ -92,6 +92,13 @@ function animate() {
 	path.setAttribute("d", spline(points, 1, true));
 	path2.setAttribute("d", spline(points, 1, true));
 
+	const coords = path.getBoundingClientRect();
+	const hoverelement = document.getElementById("hoverelement");
+	hoverelement.style.setProperty("left", `${coords.left}px`, "");
+	hoverelement.style.setProperty("top", `${coords.top}px`, "");
+	hoverelement.style.setProperty("width", `${coords.width}px`, "");
+	hoverelement.style.setProperty("height", `${coords.height}px`, "");
+
 	for (let i = 0; i < points.length; i++) {
 		const point = points[i];
 
@@ -106,13 +113,6 @@ function animate() {
 		point.noiseOffsetX += noiseStep;
 		point.noiseOffsetY += noiseStep;
 	}
-
-	const hueNoise = noise(hueNoiseOffset, hueNoiseOffset);
-	const hue = map(hueNoise, -1, 1, 0, 360);
-
-	root.style.setProperty("--startColor", `hsl(${hue}, 100%, 75%)`);
-	root.style.setProperty("--stopColor", `hsl(${hue + 60}, 100%, 75%)`);
-	document.body.style.background = `hsl(${hue + 60}, 75%, 5%)`;
 
 	hueNoiseOffset += noiseStep / 6;
 
@@ -154,7 +154,7 @@ function createPoints() {
 	return points;
 }
 
-document.querySelector("#me svg").addEventListener("mouseover", () => {
+document.querySelector("#me #hoverelement").addEventListener("mouseover", () => {
 	noiseStep = 0.001;
 	if (!started) {
 		animate();
@@ -162,7 +162,7 @@ document.querySelector("#me svg").addEventListener("mouseover", () => {
 	}
 });
 
-document.querySelector("#me svg").addEventListener("mouseleave", () => {
+document.querySelector("#me #hoverelement").addEventListener("mouseleave", () => {
 	noiseStep = 0.0;
 });
 
