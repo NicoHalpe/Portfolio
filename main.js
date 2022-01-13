@@ -82,7 +82,7 @@ const root = document.documentElement;
 let started = false;
 
 let hueNoiseOffset = 0;
-let noiseStep = 0.0;
+let noiseStep = 0.0001;
 
 const simplex = new SimplexNoise();
 
@@ -163,7 +163,7 @@ document.querySelector("#me #hoverelement").addEventListener("mouseover", () => 
 });
 
 document.querySelector("#me #hoverelement").addEventListener("mouseleave", () => {
-	noiseStep = 0.0;
+	noiseStep = 0.0001;
 });
 
 //#endregion
