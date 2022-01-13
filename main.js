@@ -119,7 +119,7 @@ function animate() {
 	requestAnimationFrame(animate);
 }
 
-animate()
+animate();
 
 function map(n, start1, end1, start2, end2) {
 	return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
@@ -131,9 +131,9 @@ function noise(x, y) {
 
 function createPoints() {
 	const points = [];
-	const numPoints = 6;
+	const numPoints = 5;
 	const angleStep = (Math.PI * 2) / numPoints;
-	const rad = 75;
+	const rad = 78;
 
 	for (let i = 1; i <= numPoints; i++) {
 		const theta = i * angleStep;
