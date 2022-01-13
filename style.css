@@ -169,7 +169,7 @@ section {
 	transition: 0.1s;
 }
 
-#me img {
+#me svg {
 	width: 30%;
 	height: auto;
 	animation: enter-right 0.8s ease-in-out;
@@ -429,6 +429,12 @@ section {
 	animation: enter-bottom 0.8s ease-out;
 }
 
+@media only screen and (max-width: 600px) {
+	#me svg {
+		width: 60%;
+	}
+}
+
 @media only screen and (max-width: 1000px) {
 	section {
 		height: fit-content;
@@ -440,10 +446,6 @@ section {
 		justify-content: start;
 		gap: 10vh;
 		padding-top: 10vh;
-	}
-
-	#me img {
-		width: 40%;
 	}
 
 	#about {
