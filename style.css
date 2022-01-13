@@ -89,6 +89,17 @@
 		transform: translateY(20vw);
 	}
 }
+@keyframes backforw {
+	from {
+		transform: translateY(-10px);
+	}
+	50% {
+		transform: translateY(10px);
+	}
+	to {
+		transform: translateY(-10px);
+	}
+}
 
 * {
 	margin: 0;
@@ -101,8 +112,10 @@
 	position: fixed;
 }
 
-html, body {
+html,
+body {
 	overflow-x: hidden;
+	background-color: #1d1d1d;
 }
 
 .spanText {
@@ -120,6 +133,7 @@ html, body {
 }
 
 section {
+	position: relative;
 	min-height: 100vh;
 	background-color: #1d1d1d;
 	color: white;
@@ -173,7 +187,7 @@ section {
 	transition: 0.1s;
 }
 
-#me svg {
+#me .avatar {
 	width: 30%;
 	height: auto;
 	animation: enter-right 0.8s ease-in-out;
@@ -433,8 +447,31 @@ section {
 	animation: enter-bottom 0.8s ease-out;
 }
 
+.scroll-down.r,
+.scroll-up.r {
+	right: 10px;
+}
+.scroll-down.l,
+.scroll-up.l {
+	left: 20px;
+}
+.scroll-down span,
+.scroll-up span {
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+}
+.scroll-down svg {
+	margin-top: 10px;
+	width: 10px;
+}
+.scroll-up svg {
+	margin-bottom: 10px;
+	width: 10px;
+	transform: rotate(180deg);
+}
+
 @media only screen and (max-width: 600px) {
-	#me svg {
+	#me .avatar {
 		width: 60%;
 	}
 }
@@ -448,7 +485,7 @@ section {
 		min-height: 90vh;
 		flex-direction: column-reverse;
 		justify-content: start;
-		gap: 10vh;
+		gap: 5vh;
 		padding-top: 10vh;
 	}
 
@@ -456,7 +493,7 @@ section {
 		flex-direction: column-reverse;
 		justify-content: center;
 		gap: 5vh;
-		padding-bottom: 15vh;
+		margin-bottom: 15vh;
 	}
 
 	#about .content {
@@ -509,6 +546,13 @@ section {
 		justify-content: center;
 		border-radius: 5px;
 	}
+	.scroll-down.l,
+	.scroll-up.l {
+		display: none;
+	}
+	#skills .scroll-down.r {
+		display: none;
+	}
 }
 
 *::-webkit-scrollbar {
@@ -538,4 +582,24 @@ section {
 
 body::-webkit-scrollbar {
 	background-color: #1d1d1d;
+}
+
+.scroll-down,
+.scroll-up {
+	position: absolute;
+	bottom: 8vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: clamp(10px, 2vw, 14px);
+	color: #fff;
+	animation: backforw 1.5s ease-in-out infinite;
+	cursor: pointer;
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.scroll-up {
+	bottom: 6vh;
 }

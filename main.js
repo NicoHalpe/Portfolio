@@ -82,7 +82,7 @@ const root = document.documentElement;
 let started = false;
 
 let hueNoiseOffset = 0;
-let noiseStep = 0.0001;
+let noiseStep = 0.0005;
 
 const simplex = new SimplexNoise();
 
