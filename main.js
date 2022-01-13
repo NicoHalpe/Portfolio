@@ -163,7 +163,7 @@ document.querySelector("#me #hoverelement").addEventListener("mouseover", () => 
 });
 
 document.querySelector("#me #hoverelement").addEventListener("mouseleave", () => {
-	noiseStep = 0.0001;
+	noiseStep = 0.0005;
 });
 
 //#endregion
