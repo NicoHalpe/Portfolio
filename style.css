@@ -449,7 +449,7 @@ section {
 
 .scroll-down.r,
 .scroll-up.r {
-	right: 10px;
+	right: 20px;
 }
 .scroll-down.l,
 .scroll-up.l {
@@ -479,10 +479,12 @@ section {
 @media only screen and (max-width: 1000px) {
 	section {
 		height: fit-content;
+		min-height: 0;
 	}
 
 	#me {
-		min-height: 90vh;
+		height: 88vh;
+		min-height: 88vh;
 		flex-direction: column-reverse;
 		justify-content: start;
 		gap: 5vh;
@@ -490,10 +492,12 @@ section {
 	}
 
 	#about {
+		height: 85vh;
+		min-height: 85vh;
 		flex-direction: column-reverse;
 		justify-content: center;
 		gap: 5vh;
-		margin-bottom: 15vh;
+		padding-bottom: 15vh;
 	}
 
 	#about .content {
@@ -552,6 +556,9 @@ section {
 	}
 	#skills .scroll-down.r {
 		display: none;
+	}
+	.scroll-down.r {
+		bottom: 10vh;
 	}
 }
 
