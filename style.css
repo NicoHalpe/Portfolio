@@ -154,7 +154,7 @@ section {
 }
 
 #me .content h1 span {
-	font-size: clamp(2rem, 6vw, 4.5rem);
+	font-size: clamp(1.9rem, 6vw, 4.5rem);
 	opacity: 0;
 }
 #me .content h1 span.bounceIn {
@@ -218,7 +218,7 @@ section {
 }
 
 #about h2 {
-	font-size: clamp(2rem, 6vw, 4.5rem);
+	font-size: clamp(1.9rem, 6vw, 4.5rem);
 	text-align: end;
 	color: #65c9ff;
 }
@@ -265,10 +265,16 @@ section {
 	align-items: center;
 	text-align: center;
 	outline: 2px solid white;
+	background-color: #1d1d1d;
 	border-radius: 10px;
 	width: 100%;
 	padding: 4vh 1vw;
 	gap: 30px;
+	transform-style: preserve-3d;
+	transform: perspective(1000px);
+}
+#skills .cards .card:hover {
+	z-index: 2;
 }
 
 #skills .cards .card .header,
@@ -277,6 +283,7 @@ section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	transform: translateZ(30px);
 }
 
 #skills .card-icon {
@@ -292,12 +299,12 @@ section {
 
 #skills .card h4 {
 	color: #65c9ff;
-	font-size: clamp(1rem, 3vw, 1.5rem);
+	font-size: clamp(1.2rem, 3vw, 1.5rem);
 }
 
 #skills .card p {
 	margin-top: 15px;
-	font-size: 1.4rem;
+	font-size: clamp(1.1rem, 2vw,1.4rem);
 }
 
 #skills .card ul {
@@ -306,7 +313,7 @@ section {
 
 #skills .card li {
 	margin-top: 15px;
-	font-size: 1.4rem;
+	font-size: clamp(1.1rem, 2vw,1.4rem);
 }
 
 #contact {

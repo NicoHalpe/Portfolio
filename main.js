@@ -3,11 +3,30 @@ var observer = new IntersectionObserver(onIntersection, {
 	rootMargin: "-150px",
 });
 
+let cards = document.querySelectorAll(".card");
+
 function onIntersection(entries, opts) {
 	entries.forEach((entry) => {
 		if (entry.isIntersecting) {
 			entry.target.classList.add("visible");
 			observer.unobserve(entry.target);
+			document.querySelectorAll(`#${entry.target.id} img[data-src]`).forEach((element) => {
+				element.src = element.getAttribute("data-src");
+				element.removeAttribute("data-src");
+			});
+			if (entry.target.id === "skills") {
+				let tilt = document.createElement("script");
+				tilt.src = "tilt.min.js";
+				document.head.appendChild(tilt);
+				if (window.innerWidth > 1000) {
+					setTimeout(() => {
+						VanillaTilt.init(cards, {
+							glare: true,
+							"max-glare": 0.2,
+						});
+					}, 500);
+				}
+			}
 		}
 	});
 }
@@ -78,14 +97,9 @@ import SimplexNoise from "https://cdn.skypack.dev/simplex-noise@2.4.0";
 
 const path = document.querySelector("path");
 const path2 = document.getElementById("react-path-2");
-const root = document.documentElement;
-let started = false;
 
-let hueNoiseOffset = 0;
 let noiseStep = 0.0005;
-
 const simplex = new SimplexNoise();
-
 const points = createPoints();
 
 function animate() {
@@ -113,8 +127,6 @@ function animate() {
 		point.noiseOffsetX += noiseStep;
 		point.noiseOffsetY += noiseStep;
 	}
-
-	hueNoiseOffset += noiseStep / 6;
 
 	requestAnimationFrame(animate);
 }
@@ -156,10 +168,6 @@ function createPoints() {
 
 document.querySelector("#me #hoverelement").addEventListener("mouseover", () => {
 	noiseStep = 0.001;
-	if (!started) {
-		animate();
-		started = true;
-	}
 });
 
 document.querySelector("#me #hoverelement").addEventListener("mouseleave", () => {
