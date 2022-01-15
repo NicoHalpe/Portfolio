@@ -203,7 +203,7 @@ section {
 
 #about .content {
 	opacity: 0;
-	width: 60%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -226,12 +226,6 @@ section {
 #about p {
 	font-size: clamp(1rem, 3.5vw, 1.7rem);
 	text-align: end;
-}
-
-#about img {
-	opacity: 0;
-	width: 30%;
-	height: auto;
 }
 
 #skills {
