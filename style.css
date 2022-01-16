@@ -194,23 +194,31 @@ section {
 }
 
 #about {
+	padding: 0 5vw;
+	display: flex;
+	align-items: center;
+}
+
+#about .content {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 5vw;
 }
 
-#about .content {
+#about .text {
 	opacity: 0;
-	width: 100%;
+	width: 65%;
 	display: flex;
 	flex-direction: column;
 }
 
-#about.visible .content {
+#about.visible .text {
 	opacity: 1;
 	animation: enter-right 0.9s ease-in-out;
+}
+#about img {
+	width: 30%;
 }
 #about.visible img {
 	opacity: 1;
@@ -224,7 +232,7 @@ section {
 }
 
 #about p {
-	font-size: clamp(1rem, 3.5vw, 1.7rem);
+	font-size: clamp(1rem, 2vw, 1.5rem);
 	text-align: end;
 }
 
@@ -298,7 +306,7 @@ section {
 
 #skills .card p {
 	margin-top: 15px;
-	font-size: clamp(1.1rem, 2vw,1.4rem);
+	font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
 
 #skills .card ul {
@@ -307,7 +315,7 @@ section {
 
 #skills .card li {
 	margin-top: 15px;
-	font-size: clamp(1.1rem, 2vw,1.4rem);
+	font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
 
 #contact {
@@ -387,14 +395,14 @@ section {
 #contact .socials {
 	display: flex;
 	flex-direction: column;
-	gap: 1vw;
+	gap: 20px;
 }
 
 #contact .socials .row {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 1vw;
+	gap: 10px;
 }
 
 #contact .socials .row span {
@@ -413,6 +421,7 @@ section {
 
 #contact .socials .row img {
 	width: clamp(30px, 5vw, 50px);
+	height: clamp(30px, 5vw, 50px);
 }
 
 #contact .form-submit-wrapper {
@@ -495,13 +504,15 @@ section {
 	#about {
 		height: 85vh;
 		min-height: 85vh;
-		flex-direction: column-reverse;
-		justify-content: center;
-		gap: 5vh;
 		padding-bottom: 15vh;
 	}
 
 	#about .content {
+		height: 100%;
+		align-items: center;
+	}
+
+	#about .text {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
@@ -509,7 +520,7 @@ section {
 	}
 
 	#about img {
-		width: 50%;
+		display: none;
 	}
 
 	#about h2 {
