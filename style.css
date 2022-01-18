@@ -180,7 +180,8 @@ section {
 	animation: enter-left 1.1s ease-in-out;
 }
 
-#me .content a:hover {
+#me .content a:hover,
+#me .content a:focus {
 	color: black;
 	background: #65c9ff;
 	box-shadow: 0 0 10px #2196f3, 0 0 20px #2196f3, 0 0 30px #2196f3;
@@ -385,7 +386,8 @@ section {
 	margin-top: 1vh;
 }
 
-#contact button:hover {
+#contact button:hover,
+#contact button:focus {
 	color: black;
 	background: #65c9ff;
 	box-shadow: 0 0 10px #2196f3, 0 0 20px #2196f3, 0 0 30px #2196f3;
