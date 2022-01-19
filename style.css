@@ -129,12 +129,11 @@ body {
 .animated {
 	color: #65c9ff;
 	animation: rubberBand 1s;
-	transition: all 0.3s ease-in-out;
 }
 
 section {
 	position: relative;
-	min-height: 100vh;
+	min-height: 96vh;
 	background-color: #1d1d1d;
 	color: white;
 	padding: 2vh 6vw;
@@ -156,6 +155,7 @@ section {
 #me .content h1 span {
 	font-size: clamp(1.9rem, 6vw, 4.5rem);
 	opacity: 0;
+	transition: color 0.3s ease-in-out;
 }
 #me .content h1 span.bounceIn {
 	animation-name: bounceIn;
@@ -186,6 +186,7 @@ section {
 	background: #65c9ff;
 	box-shadow: 0 0 10px #2196f3, 0 0 20px #2196f3, 0 0 30px #2196f3;
 	transition: 0.1s;
+	outline: none;
 }
 
 #me .avatar {
@@ -240,6 +241,7 @@ section {
 #skills {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 }
 
 #skills h2 {
@@ -392,6 +394,7 @@ section {
 	background: #65c9ff;
 	box-shadow: 0 0 10px #2196f3, 0 0 20px #2196f3, 0 0 30px #2196f3;
 	transition: 0.1s;
+	outline: none;
 }
 
 #contact .socials {
