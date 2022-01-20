@@ -3,18 +3,24 @@ var observer = new IntersectionObserver(onIntersection, {
 	rootMargin: "-150px",
 });
 
+const sections = ["me", "about", "skills", "proyects", "contact"];
+
 function onIntersection(entries, opts) {
 	entries.forEach((entry) => {
 		if (entry.isIntersecting) {
 			if (entry.target.tagName === "SECTION") {
 				entry.target.classList.add("visible");
 				observer.unobserve(entry.target);
-				document
-					.querySelectorAll(`#${entry.target.id} img[data-src]`)
-					.forEach((element) => {
-						element.src = element.getAttribute("data-src");
-						element.removeAttribute("data-src");
-					});
+				const nextSectionId =
+					sections[sections.findIndex((val) => val === entry.target.id) + 1];
+				if (nextSectionId) {
+					document
+						.querySelectorAll(`#${nextSectionId} img[data-src]`)
+						.forEach((element) => {
+							element.src = element.getAttribute("data-src");
+							element.removeAttribute("data-src");
+						});
+				}
 			}
 			if (entry.target.id === "skills") {
 				let tilt = document.createElement("script");
@@ -160,7 +166,9 @@ const handleCardClickPos = (dif) => {
 	for (var i = 0; i < dif; i++) {
 		const clone = originals[currentOriginalPos].cloneNode(true);
 		const clE = images.appendChild(clone);
-		clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
+		clE.getElementsByTagName("img")[0].src = clE
+			.getElementsByTagName("img")[0]
+			.getAttribute("data-src");
 		clE.getElementsByTagName("img")[0].removeAttribute("data-src");
 		currentOriginalPos += 1;
 		if (currentOriginalPos > originals.length - 1) {
@@ -197,7 +205,9 @@ const handleCardClickNeg = (dif) => {
 		const clone =
 			originals[originals.length - currentOriginalNeg].cloneNode(true);
 		const clE = images.insertBefore(clone, images.children[0]);
-		clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
+		clE.getElementsByTagName("img")[0].src = clE
+			.getElementsByTagName("img")[0]
+			.getAttribute("data-src");
 		clE.getElementsByTagName("img")[0].removeAttribute("data-src");
 		currentOriginalNeg += 1;
 		if (currentOriginalNeg > originals.length) {

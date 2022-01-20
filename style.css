@@ -143,6 +143,10 @@ section {
 	padding: 2vh 6vw;
 }
 
+section:not(.visible) {
+	content-visibility: hidden;
+}
+
 #me {
 	display: flex;
 	flex-direction: row;
@@ -217,19 +221,23 @@ section {
 	width: 65%;
 	display: flex;
 	flex-direction: column;
+	transform: translateX(100vw);
 }
 
 #about.visible .text {
 	opacity: 1;
 	animation: enter-right 0.9s ease-in-out;
+	transform: translateX(0);
 }
 #about img {
 	width: 30%;
 	height: auto;
+	transform: translateX(-50vw);
 }
 #about.visible img {
 	opacity: 1;
 	animation: enter-left 0.9s ease-in-out;
+	transform: translateX(0);
 }
 
 #about h2 {
@@ -330,6 +338,12 @@ section {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	opacity: 0;
+	transition: 1s;
+}
+
+#proyects.visible {
+	opacity: 1;
 }
 
 #proyects h2 {
