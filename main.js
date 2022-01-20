@@ -3,29 +3,35 @@ var observer = new IntersectionObserver(onIntersection, {
 	rootMargin: "-150px",
 });
 
-let cards = document.querySelectorAll(".card");
-
 function onIntersection(entries, opts) {
 	entries.forEach((entry) => {
 		if (entry.isIntersecting) {
-			entry.target.classList.add("visible");
-			observer.unobserve(entry.target);
-			document.querySelectorAll(`#${entry.target.id} img[data-src]`).forEach((element) => {
-				element.src = element.getAttribute("data-src");
-				element.removeAttribute("data-src");
-			});
+			if (entry.target.tagName === "SECTION") {
+				entry.target.classList.add("visible");
+				observer.unobserve(entry.target);
+				document
+					.querySelectorAll(`#${entry.target.id} img[data-src]`)
+					.forEach((element) => {
+						element.src = element.getAttribute("data-src");
+						element.removeAttribute("data-src");
+					});
+			}
 			if (entry.target.id === "skills") {
 				let tilt = document.createElement("script");
 				tilt.src = "tilt.min.js";
 				document.head.appendChild(tilt);
-				if (window.innerWidth > 1000) {
+			} else if (entry.target.id === "proyects") {
+				let sEvents = document.createElement("script");
+				sEvents.src = "swiped-events.min.js";
+				document.head.appendChild(sEvents);
+			} else if (entry.target.id === "carrousel") {
+				if (!entry.isIntersecting || window.innerWidth > 1000) return;
+				setTimeout(() => {
+					entry.target.classList.add("visible");
 					setTimeout(() => {
-						VanillaTilt.init(cards, {
-							glare: true,
-							"max-glare": 0.2,
-						});
-					}, 500);
-				}
+						entry.target.classList.remove("visible");
+					}, 1000);
+				}, 5000);
 			}
 		}
 	});
@@ -33,6 +39,8 @@ function onIntersection(entries, opts) {
 document.querySelectorAll("section").forEach((elem) => {
 	observer.observe(elem);
 });
+
+observer.observe(document.querySelector("#carrousel"));
 
 document.querySelectorAll("a").forEach((el) => {
 	el.addEventListener("click", (e) => {
@@ -66,10 +74,14 @@ const handleSubmit = (e) => {
 			form.reset();
 			document.querySelector(".form-submit-wrapper").classList.add("visible");
 			setTimeout(() => {
-				document.querySelector(".form-submit-wrapper").classList.remove("visible");
+				document
+					.querySelector(".form-submit-wrapper")
+					.classList.remove("visible");
 				document.querySelector(".form-submit-wrapper").classList.add("leave");
 				setTimeout(() => {
-					document.querySelector(".form-submit-wrapper").classList.remove("leave");
+					document
+						.querySelector(".form-submit-wrapper")
+						.classList.remove("leave");
 				}, 800);
 			}, 3000);
 		})
@@ -89,6 +101,131 @@ document.querySelector("form").addEventListener("submit", handleSubmit);
 		}
 	});
 });
+
+//#region Carrousel
+
+const images = document.querySelector("#proyects .cards");
+const firstCardClone = images.children[0].cloneNode(true);
+const lastCardClone =
+	images.children[images.children.length - 1].cloneNode(true);
+
+const originals = [];
+document.querySelectorAll("#proyects .card").forEach((el) => {
+	const cl = el.cloneNode(true);
+	cl.classList.remove("visible");
+	originals.push(cl);
+});
+
+images.insertBefore(lastCardClone, images.children[0]);
+images.appendChild(firstCardClone);
+
+let currentCard = 3;
+let cardWidth;
+if (window.innerWidth < 1000) {
+	cardWidth = window.innerWidth * 0.8 + 10;
+} else {
+	cardWidth = 460;
+}
+images.style.transform = `translate(-${currentCard * cardWidth}px)`;
+
+images.addEventListener("swiped", (e) => {
+	switch (e.detail.dir) {
+		case "right":
+			handleCardClickNeg(1);
+			break;
+		case "left":
+			handleCardClickPos(1);
+			break;
+	}
+});
+
+images.addEventListener("mousedown", (e) => {
+	e.path.forEach((element) => {
+		if (element.classList && element.classList.contains("card")) {
+			const children = Array.prototype.slice.call(images.children);
+			const index = children.indexOf(element);
+			const dif = index - currentCard;
+			if (dif > 0) handleCardClickPos(dif);
+			else if (dif < 0) handleCardClickNeg(-dif);
+		}
+	});
+});
+
+let currentOriginalPos = 1;
+const handleCardClickPos = (dif) => {
+	images.style.setProperty("pointer-events", "none");
+	currentCard += dif;
+	images.style.transitionDuration = "0.5s";
+	images.style.transform = `translate(-${currentCard * cardWidth}px)`;
+	for (var i = 0; i < dif; i++) {
+		const clone = originals[currentOriginalPos].cloneNode(true);
+		const clE = images.appendChild(clone);
+		clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
+		clE.getElementsByTagName("img")[0].removeAttribute("data-src");
+		currentOriginalPos += 1;
+		if (currentOriginalPos > originals.length - 1) {
+			currentOriginalPos = currentOriginalPos - originals.length;
+		}
+	}
+	images.children[currentCard].classList.add("visible");
+	images.children[currentCard - dif].classList.remove("visible");
+
+	setTimeout(() => {
+		images.style.setProperty("pointer-events", "all");
+		currentCard -= dif;
+		for (var i = 0; i < dif; i++) {
+			images.children[0].remove();
+		}
+		images.style.transitionDuration = "0s";
+		images.style.transform = `translate(-${currentCard * cardWidth}px)`;
+	}, 500);
+	currentOriginalNeg -= dif;
+	if (currentOriginalNeg <= 0) {
+		currentOriginalNeg = currentOriginalNeg + originals.length;
+	}
+};
+
+let currentOriginalNeg = 2;
+const handleCardClickNeg = (dif) => {
+	images.style.setProperty("pointer-events", "none");
+	currentCard -= dif;
+
+	images.children[currentCard + dif].classList.remove("visible");
+	images.children[currentCard].classList.add("visible");
+
+	for (var i = 0; i < dif; i++) {
+		const clone =
+			originals[originals.length - currentOriginalNeg].cloneNode(true);
+		const clE = images.insertBefore(clone, images.children[0]);
+		clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
+		clE.getElementsByTagName("img")[0].removeAttribute("data-src");
+		currentOriginalNeg += 1;
+		if (currentOriginalNeg > originals.length) {
+			currentOriginalNeg = currentOriginalNeg - originals.length;
+		}
+	}
+	images.style.transitionDuration = "0s";
+	images.style.transform = `translate(-${(3 + dif) * cardWidth}px)`;
+
+	setTimeout(() => {
+		images.style.transitionDuration = "0.5s";
+		images.style.transform = `translate(-${3 * cardWidth}px)`;
+	}, 10);
+
+	setTimeout(() => {
+		images.style.setProperty("pointer-events", "all");
+		currentCard += dif;
+		for (var i = 0; i < dif; i++) {
+			images.children[images.children.length - 1].remove();
+		}
+	}, 500);
+	currentOriginalPos -= dif;
+	if (currentOriginalPos < 0) {
+		currentOriginalPos = currentOriginalPos + originals.length;
+		console.log(currentOriginalPos);
+	}
+};
+//#endregion
 
 //#region Animated Blob
 
@@ -166,13 +303,17 @@ function createPoints() {
 	return points;
 }
 
-document.querySelector("#me #hoverelement").addEventListener("mouseover", () => {
-	noiseStep = 0.001;
-});
+document
+	.querySelector("#me #hoverelement")
+	.addEventListener("mouseover", () => {
+		noiseStep = 0.001;
+	});
 
-document.querySelector("#me #hoverelement").addEventListener("mouseleave", () => {
-	noiseStep = 0.0005;
-});
+document
+	.querySelector("#me #hoverelement")
+	.addEventListener("mouseleave", () => {
+		noiseStep = 0.0005;
+	});
 
 //#endregion
 
