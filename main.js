@@ -15,7 +15,7 @@ function onIntersection(entries, opts) {
 					sections[sections.findIndex((val) => val === entry.target.id) + 1];
 				if (nextSectionId) {
 					document
-						.querySelectorAll(`#${nextSectionId} img[data-src]`)
+						.querySelectorAll(`#${nextSectionId} img[data-src], #${entry.target.id} img[data-src]`)
 						.forEach((element) => {
 							element.src = element.getAttribute("data-src");
 							element.removeAttribute("data-src");
