@@ -342,8 +342,9 @@ const setupAvatar = () => {
 };
 
 const avatar = document.getElementById("avatar");
-if (avatar.contentDocument)
+if (avatar.contentDocument && avatar.contentDocument.readyState !== "complete")
 	avatar.contentDocument.addEventListener("load", setupAvatar);
+else setupAvatar();
 avatar.addEventListener("load", setupAvatar);
 
 //#endregion
