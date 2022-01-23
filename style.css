@@ -97,7 +97,7 @@ section + section {
 	outline: none;
 }
 
-#me .avatar {
+#me #avatar {
 	width: 30%;
 	height: auto;
 	animation: enter-right 0.8s ease-in-out;
@@ -129,11 +129,13 @@ section + section {
 	animation: enter-right 0.9s ease-in-out;
 	transform: translateX(0);
 }
+#about object,
 #about img {
 	width: 30%;
 	height: auto;
 	transform: translateX(-50vw);
 }
+#about.visible object,
 #about.visible img {
 	opacity: 1;
 	animation: enter-left 0.9s ease-in-out;
