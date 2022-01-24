@@ -1,3 +1,7 @@
+const images = document.querySelector("#proyects .cards");
+let currentCard = 3;
+let cardWidth;
+
 var observer = new IntersectionObserver(onIntersection, {
 	root: null,
 	rootMargin: "-150px",
@@ -36,10 +40,18 @@ function onIntersection(entries, opts) {
 			} else if (entry.target.id === "carrousel") {
 				if (!entry.isIntersecting || window.innerWidth > 1000) return;
 				setTimeout(() => {
-					entry.target.classList.add("visible");
+					images.style.transitionDuration = "0.5s";
+					images.style.transform = `translate(-${
+						currentCard * cardWidth - window.innerWidth * 0.1 + 100
+					}px)`;
 					setTimeout(() => {
-						entry.target.classList.remove("visible");
-					}, 1000);
+						images.style.transform = `translate(-${
+							currentCard * cardWidth - window.innerWidth * 0.1
+						}px)`;
+						setTimeout(() => {
+							images.style.transitionDuration = "0s";
+						}, 500);
+					}, 600);
 				}, 5000);
 			}
 		}
@@ -113,7 +125,6 @@ document.querySelector("form").addEventListener("submit", handleSubmit);
 
 //#region Carrousel
 
-const images = document.querySelector("#proyects .cards");
 const firstCardClone = images.children[0].cloneNode(true);
 const lastCardClone =
 	images.children[images.children.length - 1].cloneNode(true);
@@ -128,8 +139,6 @@ document.querySelectorAll("#proyects .card").forEach((el) => {
 images.insertBefore(lastCardClone, images.children[0]);
 images.appendChild(firstCardClone);
 
-let currentCard = 3;
-let cardWidth;
 if (window.innerWidth < 1000) {
 	cardWidth = window.innerWidth * 0.8 + 10;
 } else {

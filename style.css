@@ -321,7 +321,7 @@ section + section {
 	cursor: pointer;
 }
 
-#proyects .cards .card:not(.visible):after {
+/* #proyects .cards .card:not(.visible):after {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -331,7 +331,7 @@ section + section {
 	border-radius: 10px;
 	border: 2px solid var(--card-after-color);
 	background-color: var(--card-after-color);
-}
+} */
 
 #proyects .cards .card.visible {
 	opacity: 1;
@@ -631,10 +631,6 @@ section + section {
 		overflow: hidden;
 	}
 
-	#proyects .carrousel.visible {
-		animation: move-center 1s ease-in-out;
-	}
-
 	#proyects .cards .card {
 		background-color: var(--background-color);
 		width: 80vw;
@@ -724,24 +720,6 @@ body::-webkit-scrollbar {
 
 .scroll-up {
 	bottom: 6vh;
-}
-
-@keyframes move-center {
-	0% {
-		transform: translateX(0);
-	}
-	20% {
-		opacity: 1;
-	}
-	50% {
-		transform: translateX(-4em);
-	}
-	80% {
-		opacity: 1;
-	}
-	100% {
-		transform: translateX(0);
-	}
 }
 
 @keyframes flip-in-ver-right {
