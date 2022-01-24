@@ -8,7 +8,7 @@
 }
 
 *:not(#carrousel *) {
-	transition: color 0.5s, background-color 0.5s, box-shadow 0.5s;
+	transition: color 0.5s, background-color 0.5s, box-shadow 0.5s, opacity 0.5s;
 }
 
 #hoverelement {
@@ -151,25 +151,21 @@ section + section {
 	width: 65%;
 	display: flex;
 	flex-direction: column;
-	transform: translateX(100vw);
 }
 
 #about.visible .text {
 	opacity: 1;
 	animation: enter-right 0.9s ease-in-out;
-	transform: translateX(0);
 }
 #about object,
 #about img {
 	width: 30%;
 	height: auto;
-	transform: translateX(-50vw);
 }
 #about.visible object,
 #about.visible img {
 	opacity: 1;
 	animation: enter-left 0.9s ease-in-out;
-	transform: translateX(0);
 }
 
 #about h2 {
@@ -228,6 +224,7 @@ section + section {
 	gap: 30px;
 	transform-style: preserve-3d;
 	transform: perspective(1000px);
+	box-sizing: border-box;
 }
 #skills .cards .card:hover {
 	z-index: 2;
@@ -321,7 +318,7 @@ section + section {
 	cursor: pointer;
 }
 
-/* #proyects .cards .card:not(.visible):after {
+#proyects .cards .card:not(.visible):after {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -331,7 +328,7 @@ section + section {
 	border-radius: 10px;
 	border: 2px solid var(--card-after-color);
 	background-color: var(--card-after-color);
-} */
+}
 
 #proyects .cards .card.visible {
 	opacity: 1;
@@ -627,8 +624,11 @@ section + section {
 	}
 
 	#proyects .carrousel {
-		width: 100vw;
-		overflow: hidden;
+		width: calc(80vw);
+	}
+
+	#proyects .carrousel.visible {
+		animation: move-center 1s ease-in-out;
 	}
 
 	#proyects .cards .card {
@@ -720,6 +720,24 @@ body::-webkit-scrollbar {
 
 .scroll-up {
 	bottom: 6vh;
+}
+
+@keyframes move-center {
+	0% {
+		transform: translateX(0);
+	}
+	20% {
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(-4em);
+	}
+	80% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(0);
+	}
 }
 
 @keyframes flip-in-ver-right {
