@@ -13,16 +13,28 @@ function onIntersection(entries, opts) {
 				observer.unobserve(entry.target);
 				const nextSectionId =
 					sections[sections.findIndex((val) => val === entry.target.id) + 1];
-				if (nextSectionId) {
-					document
-						.querySelectorAll(
-							`#${nextSectionId} img[data-src], #${entry.target.id} img[data-src]`
-						)
-						.forEach((element) => {
-							element.src = element.getAttribute("data-src");
-							element.removeAttribute("data-src");
-						});
-				}
+
+				document
+					.querySelectorAll(
+						`${nextSectionId ? `#${nextSectionId} img[data-src], ` : ""}#${
+							entry.target.id
+						} img[data-src]`
+					)
+					.forEach((element) => {
+						element.src = element.getAttribute("data-src");
+						element.removeAttribute("data-src");
+					});
+
+				document
+					.querySelectorAll(
+						`${nextSectionId ? `#${nextSectionId} object[data-src],` : ""} #${
+							entry.target.id
+						} object[data-src]`
+					)
+					.forEach((element) => {
+						element.setAttribute("data", element.getAttribute("data-src"));
+						element.removeAttribute("data-src");
+					});
 			}
 			if (entry.target.id === "skills") {
 				let tilt = document.createElement("script");
@@ -344,6 +356,40 @@ const setupAvatar = () => {
 };
 
 const avatar = document.getElementById("avatar");
+
+document
+	.querySelector("#me #hoverelement")
+	.addEventListener("mousedown", (e) => {
+		if (e.button !== 0) return;
+		const theme = document.documentElement.getAttribute("theme");
+		document.documentElement.setAttribute(
+			"theme",
+			theme === "dark" ? "light" : "dark"
+		);
+		const colorAccent = getComputedStyle(
+			document.documentElement
+		).getPropertyValue("--color-accent");
+		const textColor = getComputedStyle(
+			document.documentElement
+		).getPropertyValue("--text-color");
+		if (
+			avatar.contentDocument &&
+			avatar.contentDocument.readyState === "complete"
+		) {
+			avatar.contentDocument
+				.querySelector("path")
+				.setAttribute("fill", colorAccent);
+		}
+		document
+			.getElementById("programming-svg")
+			.contentDocument.querySelector("svg")
+			.setAttribute("style", `--color: ${textColor}`);
+		document.querySelectorAll("#contact object").forEach((obj) => {
+			obj.contentDocument
+				.querySelector("svg")
+				.setAttribute("fill", textColor);
+		});
+	});
 
 if (avatar.contentDocument && avatar.contentDocument.readyState !== "complete")
 	avatar.contentDocument.addEventListener("load", setupAvatar);

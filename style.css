@@ -7,6 +7,10 @@
 	scroll-behavior: smooth;
 }
 
+*:not(#carrousel *) {
+	transition: color 0.5s, background-color 0.5s, box-shadow 0.5s;
+}
+
 #hoverelement {
 	position: fixed;
 }
@@ -14,11 +18,32 @@
 html,
 body {
 	overflow-x: hidden;
-	background-color: #1d1d1d;
+	background-color: var(--background-color);
 }
 
-body {
-	overflow-y: hidden;
+html[theme="light"] {
+	--background-color: white;
+	--color-accent: #229bdd;
+	--text-color: black;
+	--subtitle-color: rgba(0, 0, 0, 0.7);
+	--button-focus-text-color: white;
+	--form-background-color: #dfdfdf;
+	--form-text-color: #4e4e4e;
+	--chip-background-color: #c5c5c5;
+	--card-after-color: rgba(255, 255, 255, 0.3);
+}
+
+html[theme="dark"] {
+	--background-color: #1d1d1d;
+	--color-accent: #65c9ff;
+	--text-color: white;
+	--subtitle-color: rgba(255, 255, 255, 0.7);
+	--button-focus-text-color: black;
+	--form-background-color: #2b2b2b;
+	--form-text-color: #dddddd;
+	--chip-background-color: white;
+	--card-after-color: rgba(29, 29, 29, 0.5);
+	fill: #155724;
 }
 
 .spanText {
@@ -30,16 +55,19 @@ body {
 }
 
 .animated {
-	color: #65c9ff;
+	color: var(--color-accent);
 	animation: rubberBand 1s;
 }
 
 section {
 	position: relative;
 	min-height: 96vh;
-	background-color: #1d1d1d;
-	color: white;
+	background-color: var(--background-color);
 	padding: 2vh 6vw;
+}
+
+section *:not(h2 span) {
+	color: var(--text-color);
 }
 
 section + section {
@@ -72,7 +100,7 @@ section + section {
 
 #me .content p {
 	font-size: clamp(1rem, 4vw, 2rem);
-	color: rgba(255, 255, 255, 0.7);
+	color: var(--subtitle-color);
 	animation: enter-left 0.9s ease-in-out;
 }
 
@@ -80,8 +108,8 @@ section + section {
 	font-size: clamp(1rem, 3.5vw, 1.7rem);
 	width: fit-content;
 	border-radius: 5px;
-	outline: 2px solid #65c9ff;
-	color: #65c9ff;
+	border: 2px solid var(--color-accent);
+	color: var(--color-accent);
 	padding: 8px 25px;
 	text-decoration: none;
 	margin-top: 3vh;
@@ -90,10 +118,8 @@ section + section {
 
 #me .content a:hover,
 #me .content a:focus {
-	color: black;
-	background: #65c9ff;
-	box-shadow: 0 0 10px #2196f3, 0 0 20px #2196f3, 0 0 30px #2196f3;
-	transition: 0.1s;
+	color: var(--button-focus-text-color);
+	box-shadow: inset 300px 0 0 0 var(--color-accent);
 	outline: none;
 }
 
@@ -101,6 +127,10 @@ section + section {
 	width: 30%;
 	height: auto;
 	animation: enter-right 0.8s ease-in-out;
+}
+
+#me #hoverelement {
+	cursor: pointer;
 }
 
 #about {
@@ -145,7 +175,7 @@ section + section {
 #about h2 {
 	font-size: clamp(1.9rem, 6vw, 4.5rem);
 	text-align: end;
-	color: #65c9ff;
+	color: var(--color-accent);
 }
 
 #about p {
@@ -162,7 +192,7 @@ section + section {
 #skills h2 {
 	visibility: hidden;
 	font-size: clamp(2rem, 6vw, 4.5rem);
-	color: #65c9ff;
+	color: var(--color-accent);
 	margin-bottom: 5vh;
 }
 
@@ -190,8 +220,8 @@ section + section {
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	outline: 2px solid white;
-	background-color: #1d1d1d;
+	outline: 2px solid var(--text-color);
+	background-color: var(--background-color);
 	border-radius: 10px;
 	width: 100%;
 	padding: 4vh 1vw;
@@ -219,12 +249,12 @@ section + section {
 
 #skills .card h3 {
 	padding-bottom: 5px;
-	color: white;
+	color: var(--text-color);
 	font-size: clamp(1.4rem, 4vw, 1.5rem);
 }
 
 #skills .card h4 {
-	color: #65c9ff;
+	color: var(--color-accent);
 	font-size: clamp(1.2rem, 3vw, 1.5rem);
 }
 
@@ -256,7 +286,7 @@ section + section {
 
 #proyects h2 {
 	font-size: clamp(2rem, 6vw, 4.5rem);
-	color: #65c9ff;
+	color: var(--color-accent);
 	margin-bottom: 5vh;
 }
 
@@ -283,8 +313,8 @@ section + section {
 	padding: 20px;
 	border-radius: 10px;
 	gap: 10px;
-	color: white;
-	border: 2px solid white;
+	color: var(--text-color);
+	border: 2px solid var(--text-color);
 	/* opacity: 0.6; */
 	transform: scale(0.9);
 	transition: 0.5s;
@@ -296,9 +326,11 @@ section + section {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	top: 0;
-	left: 0;
-	background-color: #1d1d1d80;
+	top: -2px;
+	left: -2px;
+	border-radius: 10px;
+	border: 2px solid var(--card-after-color);
+	background-color: var(--card-after-color);
 }
 
 #proyects .cards .card.visible {
@@ -361,7 +393,7 @@ section + section {
 #proyects .card .card-stacks .chip {
 	height: fit-content;
 	width: fit-content;
-	background-color: rgb(255, 255, 255);
+	background-color: var(--chip-background-color);
 	padding: 5px 10px;
 	border-radius: 50px;
 	text-align: center;
@@ -386,7 +418,7 @@ section + section {
 
 #contact h2 {
 	font-size: clamp(2rem, 6vw, 4.5rem);
-	color: #65c9ff;
+	color: var(--color-accent);
 	margin-bottom: 5vh;
 }
 
@@ -412,11 +444,11 @@ section + section {
 #contact .form textarea {
 	outline: none;
 	border: none;
-	background-color: #2b2b2b;
+	background-color: var(--form-background-color);
 	font-size: clamp(1rem, 3vw, 1.5rem);
 	border-radius: 10px;
 	padding: 15px 20px;
-	color: #dddddd;
+	color: var(--form-text-color);
 }
 
 #contact .form textarea {
@@ -427,12 +459,11 @@ section + section {
 	font-size: clamp(1rem, 3.5vw, 1.7rem);
 	width: fit-content;
 	border-radius: 5px;
-	outline: 2px solid #65c9ff;
-	color: #65c9ff;
+	border: 2px solid var(--color-accent);
+	color: var(--color-accent);
 	padding: 8px 25px;
 	text-decoration: none;
 	background-color: transparent;
-	border: none;
 	align-self: flex-end;
 	cursor: pointer;
 	margin-top: 1vh;
@@ -440,10 +471,8 @@ section + section {
 
 #contact button:hover,
 #contact button:focus {
-	color: black;
-	background: #65c9ff;
-	box-shadow: 0 0 10px #2196f3, 0 0 20px #2196f3, 0 0 30px #2196f3;
-	transition: 0.1s;
+	color: var(--button-focus-text-color);
+	box-shadow: inset 300px 0 0 0 var(--color-accent);
 	outline: none;
 }
 
@@ -463,7 +492,7 @@ section + section {
 #contact .socials .row span {
 	text-decoration: none;
 	font-size: clamp(1rem, 3.5vw, 1.7rem);
-	color: white;
+	color: var(--text-color);
 }
 
 #contact .socials .row {
@@ -474,7 +503,7 @@ section + section {
 	transform: scale(1.05);
 }
 
-#contact .socials .row img {
+#contact .socials .row object {
 	width: clamp(30px, 5vw, 50px);
 	height: clamp(30px, 5vw, 50px);
 }
@@ -535,8 +564,8 @@ section + section {
 	transform: rotate(180deg);
 }
 
-@media only screen and (max-width: 600px) {
-	#me .avatar {
+@media only screen and (max-width: 800px) {
+	#me #avatar {
 		width: 60%;
 	}
 }
@@ -574,14 +603,14 @@ section + section {
 		gap: 1vh;
 	}
 
-	#about img {
+	#about object {
 		display: none;
 	}
 
 	#about h2 {
 		font-size: clamp(2rem, 6vw, 4.5rem);
 		text-align: start;
-		color: #65c9ff;
+		color: var(--color-accent);
 	}
 
 	#about p {
@@ -606,7 +635,7 @@ section + section {
 	}
 
 	#proyects .cards .card {
-		background-color: #1d1d1d;
+		background-color: var(--background-color);
 		width: 80vw;
 		box-sizing: border-box;
 	}
@@ -673,7 +702,7 @@ section + section {
 }
 
 body::-webkit-scrollbar {
-	background-color: #1d1d1d;
+	background-color: var(--background-color);
 }
 
 .scroll-down,
