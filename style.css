@@ -624,7 +624,7 @@ section + section {
 	}
 
 	#proyects .carrousel {
-		width: calc(80vw);
+		width: 100vw
 	}
 
 	#proyects .carrousel.visible {
