@@ -627,7 +627,8 @@ section + section {
 	}
 
 	#proyects .carrousel {
-		width: calc(80vw);
+		width: 100vw;
+		overflow: hidden;
 	}
 
 	#proyects .carrousel.visible {

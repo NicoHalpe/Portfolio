@@ -135,7 +135,9 @@ if (window.innerWidth < 1000) {
 } else {
 	cardWidth = 460;
 }
-images.style.transform = `translate(-${currentCard * cardWidth}px)`;
+images.style.transform = `translate(-${
+	currentCard * cardWidth - window.innerWidth * 0.1
+}px)`;
 
 images.addEventListener("swiped", (e) => {
 	switch (e.detail.dir) {
@@ -165,7 +167,9 @@ const handleCardClickPos = (dif) => {
 	images.style.setProperty("pointer-events", "none");
 	currentCard += dif;
 	images.style.transitionDuration = "0.5s";
-	images.style.transform = `translate(-${currentCard * cardWidth}px)`;
+	images.style.transform = `translate(-${
+		currentCard * cardWidth - window.innerWidth * 0.1
+	}px)`;
 	for (var i = 0; i < dif; i++) {
 		const clone = originals[currentOriginalPos].cloneNode(true);
 		const clE = images.appendChild(clone);
@@ -188,7 +192,9 @@ const handleCardClickPos = (dif) => {
 			images.children[0].remove();
 		}
 		images.style.transitionDuration = "0s";
-		images.style.transform = `translate(-${currentCard * cardWidth}px)`;
+		images.style.transform = `translate(-${
+			currentCard * cardWidth - window.innerWidth * 0.1
+		}px)`;
 	}, 500);
 	currentOriginalNeg -= dif;
 	if (currentOriginalNeg <= 0) {
@@ -218,11 +224,15 @@ const handleCardClickNeg = (dif) => {
 		}
 	}
 	images.style.transitionDuration = "0s";
-	images.style.transform = `translate(-${(3 + dif) * cardWidth}px)`;
+	images.style.transform = `translate(-${
+		(3 + dif) * cardWidth - window.innerWidth * 0.1
+	}px)`;
 
 	setTimeout(() => {
 		images.style.transitionDuration = "0.5s";
-		images.style.transform = `translate(-${3 * cardWidth}px)`;
+		images.style.transform = `translate(-${
+			3 * cardWidth - window.innerWidth * 0.1
+		}px)`;
 	}, 10);
 
 	setTimeout(() => {
@@ -374,9 +384,7 @@ document
 			.contentDocument.querySelector("svg")
 			.setAttribute("style", `--color: ${textColor}`);
 		document.querySelectorAll("#contact object").forEach((obj) => {
-			obj.contentDocument
-				.querySelector("svg")
-				.setAttribute("fill", textColor);
+			obj.contentDocument.querySelector("svg").setAttribute("fill", textColor);
 		});
 	});
 
