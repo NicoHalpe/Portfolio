@@ -24,17 +24,6 @@ function onIntersection(entries, opts) {
 						element.src = element.getAttribute("data-src");
 						element.removeAttribute("data-src");
 					});
-
-				document
-					.querySelectorAll(
-						`${nextSectionId ? `#${nextSectionId} object[data-src],` : ""} #${
-							entry.target.id
-						} object[data-src]`
-					)
-					.forEach((element) => {
-						element.setAttribute("data", element.getAttribute("data-src"));
-						element.removeAttribute("data-src");
-					});
 			}
 			if (entry.target.id === "skills") {
 				let tilt = document.createElement("script");
