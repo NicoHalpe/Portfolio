@@ -245,106 +245,111 @@ import { spline } from "https://cdn.skypack.dev/@georgedoescode/spline@1.0.1";
 import SimplexNoise from "https://cdn.skypack.dev/simplex-noise@2.4.0";
 
 const setupAvatar = () => {
-	const path = avatar.contentDocument.querySelector("path");
-	const path2 = avatar.contentDocument.getElementById("react-path-2");
-	const transform = avatar.contentDocument.getElementById("transform");
-	transform.setAttribute("transform", "translate(845.000000, 1130.000000)");
-	path2.setAttribute("transform", "translate(0, -5)");
+	try {
+		const path = avatar.contentDocument.querySelector("path");
+		const path2 = avatar.contentDocument.getElementById("react-path-2");
+		const transform = avatar.contentDocument.getElementById("transform");
+		transform.setAttribute("transform", "translate(845.000000, 1130.000000)");
+		path2.setAttribute("transform", "translate(0, -5)");
 
-	let noiseStep = 0.0005;
-	const simplex = new SimplexNoise();
-	const points = createPoints();
+		let noiseStep = 0.0005;
+		const simplex = new SimplexNoise();
+		const points = createPoints();
 
-	function animate() {
-		path.setAttribute("d", spline(points, 1, true));
-		path2.setAttribute("d", spline(points, 1, true));
+		function animate() {
+			path.setAttribute("d", spline(points, 1, true));
+			path2.setAttribute("d", spline(points, 1, true));
 
-		const coords = path.getBoundingClientRect();
-		const avararCords = avatar.getBoundingClientRect();
-		const hoverelement = document.getElementById("hoverelement");
-		hoverelement.style.setProperty(
-			"left",
-			`${coords.left + avararCords.left}px`,
-			""
-		);
-		hoverelement.style.setProperty(
-			"top",
-			`${coords.top + avararCords.top}px`,
-			""
-		);
-		hoverelement.style.setProperty("width", `${coords.width}px`, "");
-		hoverelement.style.setProperty("height", `${coords.height}px`, "");
+			const coords = path.getBoundingClientRect();
+			const avararCords = avatar.getBoundingClientRect();
+			const hoverelement = document.getElementById("hoverelement");
+			hoverelement.style.setProperty(
+				"left",
+				`${coords.left + avararCords.left}px`,
+				""
+			);
+			hoverelement.style.setProperty(
+				"top",
+				`${coords.top + avararCords.top}px`,
+				""
+			);
+			hoverelement.style.setProperty("width", `${coords.width}px`, "");
+			hoverelement.style.setProperty("height", `${coords.height}px`, "");
 
-		for (let i = 0; i < points.length; i++) {
-			const point = points[i];
+			for (let i = 0; i < points.length; i++) {
+				const point = points[i];
 
-			const nX = noise(point.noiseOffsetX, point.noiseOffsetX);
-			const nY = noise(point.noiseOffsetY, point.noiseOffsetY);
-			const x = map(nX, -1, 1, point.originX - 20, point.originX + 20);
-			const y = map(nY, -1, 1, point.originY - 20, point.originY + 20);
+				const nX = noise(point.noiseOffsetX, point.noiseOffsetX);
+				const nY = noise(point.noiseOffsetY, point.noiseOffsetY);
+				const x = map(nX, -1, 1, point.originX - 20, point.originX + 20);
+				const y = map(nY, -1, 1, point.originY - 20, point.originY + 20);
 
-			point.x = x;
-			point.y = y;
+				point.x = x;
+				point.y = y;
 
-			point.noiseOffsetX += noiseStep;
-			point.noiseOffsetY += noiseStep;
+				point.noiseOffsetX += noiseStep;
+				point.noiseOffsetY += noiseStep;
+			}
+
+			requestAnimationFrame(animate);
 		}
 
-		requestAnimationFrame(animate);
-	}
+		animate();
 
-	animate();
+		function map(n, start1, end1, start2, end2) {
+			return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
+		}
 
-	function map(n, start1, end1, start2, end2) {
-		return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
-	}
+		function noise(x, y) {
+			return simplex.noise2D(x, y);
+		}
 
-	function noise(x, y) {
-		return simplex.noise2D(x, y);
-	}
+		function createPoints() {
+			const points = [];
+			const numPoints = 5;
+			const angleStep = (Math.PI * 2) / numPoints;
+			const rad = 78;
 
-	function createPoints() {
-		const points = [];
-		const numPoints = 5;
-		const angleStep = (Math.PI * 2) / numPoints;
-		const rad = 78;
+			for (let i = 1; i <= numPoints; i++) {
+				const theta = i * angleStep;
 
-		for (let i = 1; i <= numPoints; i++) {
-			const theta = i * angleStep;
+				const x = 100 + Math.cos(theta) * rad;
+				const y = 100 + Math.sin(theta) * rad;
 
-			const x = 100 + Math.cos(theta) * rad;
-			const y = 100 + Math.sin(theta) * rad;
+				points.push({
+					x: x,
+					y: y,
+					originX: x,
+					originY: y,
+					noiseOffsetX: Math.random() * 1000,
+					noiseOffsetY: Math.random() * 1000,
+				});
+			}
 
-			points.push({
-				x: x,
-				y: y,
-				originX: x,
-				originY: y,
-				noiseOffsetX: Math.random() * 1000,
-				noiseOffsetY: Math.random() * 1000,
+			return points;
+		}
+
+		document
+			.querySelector("#me #hoverelement")
+			.addEventListener("mouseover", () => {
+				noiseStep = 0.001;
 			});
-		}
 
-		return points;
-	}
-
-	document
-		.querySelector("#me #hoverelement")
-		.addEventListener("mouseover", () => {
-			noiseStep = 0.001;
-		});
-
-	document
-		.querySelector("#me #hoverelement")
-		.addEventListener("mouseleave", () => {
-			noiseStep = 0.0005;
-		});
+		document
+			.querySelector("#me #hoverelement")
+			.addEventListener("mouseleave", () => {
+				noiseStep = 0.0005;
+			});
+	} catch {}
 };
 
 const avatar = document.getElementById("avatar");
+
 if (avatar.contentDocument && avatar.contentDocument.readyState !== "complete")
 	avatar.contentDocument.addEventListener("load", setupAvatar);
-else if (avatar.contentDocument) setupAvatar();
+else if (avatar.contentDocument) {
+	setupAvatar();
+}
 avatar.addEventListener("load", setupAvatar);
 
 //#endregion
