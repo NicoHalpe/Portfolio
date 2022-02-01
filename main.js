@@ -1,6 +1,14 @@
 const images = document.querySelector("#proyects .cards");
 let currentCard = 3;
 let cardWidth;
+let mobileDif = 0;
+
+if (window.innerWidth < 1000) {
+	cardWidth = window.innerWidth * 0.8 + 10;
+	mobileDif = window.innerWidth * 0.1;
+} else {
+	cardWidth = 460;
+}
 
 var observer = new IntersectionObserver(onIntersection, {
 	root: null,
@@ -15,14 +23,11 @@ function onIntersection(entries, opts) {
 			if (entry.target.tagName === "SECTION") {
 				entry.target.classList.add("visible");
 				observer.unobserve(entry.target);
-				const nextSectionId =
-					sections[sections.findIndex((val) => val === entry.target.id) + 1];
+				const nextSectionId = sections[sections.findIndex((val) => val === entry.target.id) + 1];
 
 				document
 					.querySelectorAll(
-						`${nextSectionId ? `#${nextSectionId} img[data-src], ` : ""}#${
-							entry.target.id
-						} img[data-src]`
+						`${nextSectionId ? `#${nextSectionId} img[data-src], ` : ""}#${entry.target.id} img[data-src]`
 					)
 					.forEach((element) => {
 						element.src = element.getAttribute("data-src");
@@ -41,13 +46,9 @@ function onIntersection(entries, opts) {
 				if (!entry.isIntersecting || window.innerWidth > 1000) return;
 				setTimeout(() => {
 					images.style.transitionDuration = "0.5s";
-					images.style.transform = `translate(-${
-						currentCard * cardWidth - window.innerWidth * 0.1 + 100
-					}px)`;
+					images.style.transform = `translate(-${currentCard * cardWidth - mobileDif + 100}px)`;
 					setTimeout(() => {
-						images.style.transform = `translate(-${
-							currentCard * cardWidth - window.innerWidth * 0.1
-						}px)`;
+						images.style.transform = `translate(-${currentCard * cardWidth - mobileDif}px)`;
 						setTimeout(() => {
 							images.style.transitionDuration = "0s";
 						}, 500);
@@ -95,14 +96,10 @@ const handleSubmit = (e) => {
 			form.reset();
 			document.querySelector(".form-submit-wrapper").classList.add("visible");
 			setTimeout(() => {
-				document
-					.querySelector(".form-submit-wrapper")
-					.classList.remove("visible");
+				document.querySelector(".form-submit-wrapper").classList.remove("visible");
 				document.querySelector(".form-submit-wrapper").classList.add("leave");
 				setTimeout(() => {
-					document
-						.querySelector(".form-submit-wrapper")
-						.classList.remove("leave");
+					document.querySelector(".form-submit-wrapper").classList.remove("leave");
 				}, 800);
 			}, 3000);
 		})
@@ -125,9 +122,19 @@ document.querySelector("form").addEventListener("submit", handleSubmit);
 
 //#region Carrousel
 
+window.addEventListener("resize", (e) => {
+	if (window.innerWidth < 1000) {
+		cardWidth = window.innerWidth * 0.8 + 10;
+		mobileDif = window.innerWidth * 0.1;
+	} else {
+		cardWidth = 460;
+	}
+
+	images.style.transform = `translate(-${currentCard * cardWidth - mobileDif}px)`;
+});
+
 const firstCardClone = images.children[0].cloneNode(true);
-const lastCardClone =
-	images.children[images.children.length - 1].cloneNode(true);
+const lastCardClone = images.children[images.children.length - 1].cloneNode(true);
 
 const originals = [];
 document.querySelectorAll("#proyects .card").forEach((el) => {
@@ -139,14 +146,7 @@ document.querySelectorAll("#proyects .card").forEach((el) => {
 images.insertBefore(lastCardClone, images.children[0]);
 images.appendChild(firstCardClone);
 
-if (window.innerWidth < 1000) {
-	cardWidth = window.innerWidth * 0.8 + 10;
-} else {
-	cardWidth = 460;
-}
-images.style.transform = `translate(-${
-	currentCard * cardWidth - window.innerWidth * 0.1
-}px)`;
+images.style.transform = `translate(-${currentCard * cardWidth - mobileDif}px)`;
 
 images.addEventListener("swiped", (e) => {
 	switch (e.detail.dir) {
@@ -176,15 +176,11 @@ const handleCardClickPos = (dif) => {
 	images.style.setProperty("pointer-events", "none");
 	currentCard += dif;
 	images.style.transitionDuration = "0.5s";
-	images.style.transform = `translate(-${
-		currentCard * cardWidth - window.innerWidth * 0.1
-	}px)`;
+	images.style.transform = `translate(-${currentCard * cardWidth - mobileDif}px)`;
 	for (var i = 0; i < dif; i++) {
 		const clone = originals[currentOriginalPos].cloneNode(true);
 		const clE = images.appendChild(clone);
-		clE.getElementsByTagName("img")[0].src = clE
-			.getElementsByTagName("img")[0]
-			.getAttribute("data-src");
+		clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
 		clE.getElementsByTagName("img")[0].removeAttribute("data-src");
 		currentOriginalPos += 1;
 		if (currentOriginalPos > originals.length - 1) {
@@ -201,9 +197,7 @@ const handleCardClickPos = (dif) => {
 			images.children[0].remove();
 		}
 		images.style.transitionDuration = "0s";
-		images.style.transform = `translate(-${
-			currentCard * cardWidth - window.innerWidth * 0.1
-		}px)`;
+		images.style.transform = `translate(-${currentCard * cardWidth - mobileDif}px)`;
 	}, 500);
 	currentOriginalNeg -= dif;
 	if (currentOriginalNeg <= 0) {
@@ -220,12 +214,9 @@ const handleCardClickNeg = (dif) => {
 	images.children[currentCard].classList.add("visible");
 
 	for (var i = 0; i < dif; i++) {
-		const clone =
-			originals[originals.length - currentOriginalNeg].cloneNode(true);
+		const clone = originals[originals.length - currentOriginalNeg].cloneNode(true);
 		const clE = images.insertBefore(clone, images.children[0]);
-		clE.getElementsByTagName("img")[0].src = clE
-			.getElementsByTagName("img")[0]
-			.getAttribute("data-src");
+		clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
 		clE.getElementsByTagName("img")[0].removeAttribute("data-src");
 		currentOriginalNeg += 1;
 		if (currentOriginalNeg > originals.length) {
@@ -233,15 +224,11 @@ const handleCardClickNeg = (dif) => {
 		}
 	}
 	images.style.transitionDuration = "0s";
-	images.style.transform = `translate(-${
-		(3 + dif) * cardWidth - window.innerWidth * 0.1
-	}px)`;
+	images.style.transform = `translate(-${(3 + dif) * cardWidth - mobileDif}px)`;
 
 	setTimeout(() => {
 		images.style.transitionDuration = "0.5s";
-		images.style.transform = `translate(-${
-			3 * cardWidth - window.innerWidth * 0.1
-		}px)`;
+		images.style.transform = `translate(-${3 * cardWidth - mobileDif}px)`;
 	}, 10);
 
 	setTimeout(() => {
@@ -254,7 +241,6 @@ const handleCardClickNeg = (dif) => {
 	currentOriginalPos -= dif;
 	if (currentOriginalPos < 0) {
 		currentOriginalPos = currentOriginalPos + originals.length;
-		console.log(currentOriginalPos);
 	}
 };
 //#endregion
@@ -283,16 +269,8 @@ const setupAvatar = () => {
 			const coords = path.getBoundingClientRect();
 			const avararCords = avatar.getBoundingClientRect();
 			const hoverelement = document.getElementById("hoverelement");
-			hoverelement.style.setProperty(
-				"left",
-				`${coords.left + avararCords.left}px`,
-				""
-			);
-			hoverelement.style.setProperty(
-				"top",
-				`${coords.top + avararCords.top}px`,
-				""
-			);
+			hoverelement.style.setProperty("left", `${coords.left + avararCords.left}px`, "");
+			hoverelement.style.setProperty("top", `${coords.top + avararCords.top}px`, "");
 			hoverelement.style.setProperty("width", `${coords.width}px`, "");
 			hoverelement.style.setProperty("height", `${coords.height}px`, "");
 
@@ -349,53 +327,32 @@ const setupAvatar = () => {
 			return points;
 		}
 
-		document
-			.querySelector("#me #hoverelement")
-			.addEventListener("mouseover", () => {
-				noiseStep = 0.001;
-			});
+		document.querySelector("#me #hoverelement").addEventListener("mouseover", () => {
+			noiseStep = 0.001;
+		});
 
-		document
-			.querySelector("#me #hoverelement")
-			.addEventListener("mouseleave", () => {
-				noiseStep = 0.0005;
-			});
+		document.querySelector("#me #hoverelement").addEventListener("mouseleave", () => {
+			noiseStep = 0.0005;
+		});
 	} catch {}
 };
 
 const avatar = document.getElementById("avatar");
 
-document
-	.querySelector("#me #hoverelement")
-	.addEventListener("mousedown", (e) => {
-		if (e.button !== 0) return;
-		const theme = document.documentElement.getAttribute("theme");
-		document.documentElement.setAttribute(
-			"theme",
-			theme === "dark" ? "light" : "dark"
-		);
-		const colorAccent = getComputedStyle(
-			document.documentElement
-		).getPropertyValue("--color-accent");
-		const textColor = getComputedStyle(
-			document.documentElement
-		).getPropertyValue("--text-color");
-		if (
-			avatar.contentDocument &&
-			avatar.contentDocument.readyState === "complete"
-		) {
-			avatar.contentDocument
-				.querySelector("path")
-				.setAttribute("fill", colorAccent);
-		}
-		document
-			.getElementById("programming-svg")
-			.contentDocument.querySelector("svg")
-			.setAttribute("style", `--color: ${textColor}`);
-		document.querySelectorAll("#contact object").forEach((obj) => {
-			obj.contentDocument.querySelector("svg").setAttribute("fill", textColor);
-		});
-	});
+document.querySelector("#me #hoverelement").addEventListener("mousedown", (e) => {
+	if (e.button !== 0) return;
+	const theme = document.documentElement.getAttribute("theme");
+	document.documentElement.setAttribute("theme", theme === "dark" ? "light" : "dark");
+	const colorAccent = getComputedStyle(document.documentElement).getPropertyValue("--color-accent");
+	const textColor = getComputedStyle(document.documentElement).getPropertyValue("--text-color");
+	if (avatar.contentDocument && avatar.contentDocument.readyState === "complete") {
+		avatar.contentDocument.querySelector("path").setAttribute("fill", colorAccent);
+	}
+	document
+		.getElementById("programming-svg")
+		.contentDocument.querySelector("svg")
+		.setAttribute("style", `--color: ${textColor}`);
+});
 
 if (avatar.contentDocument && avatar.contentDocument.readyState !== "complete")
 	avatar.contentDocument.addEventListener("load", setupAvatar);
@@ -416,12 +373,13 @@ if ("serviceWorker" in navigator) {
 				function (registration) {},
 				function (err) {}
 			)
-			.catch(function (err) {
-				console.log(err);
-			});
+			.catch(function (err) {});
 	});
-} else {
-	console.log("Service Worker is not supported by browser.");
 }
 
 //#endregion
+
+document.querySelectorAll(`object[data-src]`).forEach((element) => {
+	element.data = element.getAttribute("data-src");
+	element.removeAttribute("data-src");
+});
