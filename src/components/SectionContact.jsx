@@ -1,7 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./SectionContact.css";
+import useIntersectionObserver from "../useIntersectionObserver";
 
 export default function SectionContact() {
+	const ref = useRef();
+	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
+
+	useEffect(() => {
+		if (onScreen) ref.current.classList.add("visible");
+	}, [onScreen]);
+
 	useEffect(() => {
 		const handleSubmit = (e) => {
 			e.preventDefault();
@@ -30,7 +38,7 @@ export default function SectionContact() {
 	}, []);
 
 	return (
-		<section id="contact">
+		<section id="contact" ref={ref}>
 			<h2 className="spanText">
 				<span>C</span>
 				<span>o</span>

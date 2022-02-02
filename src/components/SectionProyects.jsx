@@ -1,9 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./SectionProyects.css";
+import useIntersectionObserver from "../useIntersectionObserver";
 
 export default function SectionProyects({ images, startCard, cardWidth, mobileDif }) {
 	const [originals, setOriginals] = useState([]);
+	const ref = useRef();
+	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
+
+	useEffect(() => {
+		if (onScreen) ref.current.classList.add("visible");
+	}, [onScreen]);
 
 	useEffect(() => {
 		if (!images) return;
@@ -54,8 +61,8 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 			for (var i = 0; i < dif; i++) {
 				const clone = originals[currentOriginalPos].cloneNode(true);
 				const clE = images.appendChild(clone);
-				clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
-				clE.getElementsByTagName("img")[0].removeAttribute("data-src");
+				clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("src");
+				clE.getElementsByTagName("img")[0].removeAttribute("src");
 				currentOriginalPos += 1;
 				if (currentOriginalPos > originals.length - 1) {
 					currentOriginalPos = currentOriginalPos - originals.length;
@@ -95,8 +102,8 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 			for (var i = 0; i < dif; i++) {
 				const clone = originals[currentOriginalNeg].cloneNode(true);
 				const clE = images.insertBefore(clone, images.children[0]);
-				clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
-				clE.getElementsByTagName("img")[0].removeAttribute("data-src");
+				clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("src");
+				clE.getElementsByTagName("img")[0].removeAttribute("src");
 				currentOriginalNeg += 1;
 				if (currentOriginalNeg > originals.length) {
 					currentOriginalNeg = currentOriginalNeg - originals.length;
@@ -131,6 +138,10 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 			cl.classList.remove("visible");
 			setOriginals((old) => [...old, cl]);
 		});
+
+		let sEvents = document.createElement("script");
+		sEvents.src = "swiped-events.min.js";
+		document.head.appendChild(sEvents);
 	}, []);
 
 	useEffect(() => {
@@ -142,7 +153,7 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 	}, [images]);
 
 	return (
-		<section id="proyects">
+		<section id="proyects" ref={ref}>
 			<h2 className="spanText">
 				<span>P</span>
 				<span>r</span>
@@ -168,7 +179,7 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 							>
 								<img
 									className="card-image"
-									data-src="img/kubikware-remake.png"
+									src="img/kubikware-remake.png"
 									style={{ objectPosition: 0 }}
 									alt="kubikware por nicolas halperin"
 								/>
@@ -193,7 +204,7 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 							>
 								<img
 									className="card-image"
-									data-src="img/rocket stats.png"
+									src="img/rocket stats.png"
 									alt="rocket stats por nicolas halperin"
 								/>
 							</a>
@@ -223,7 +234,7 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 							>
 								<img
 									className="card-image"
-									data-src="img/infocus.png"
+									src="img/infocus.png"
 									alt="infocus por nicolas halperin y 3 más"
 								/>
 							</a>
@@ -253,7 +264,7 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 							>
 								<img
 									className="card-image"
-									data-src="img/calcular-fechas.png"
+									src="img/calcular-fechas.png"
 									alt="calcular fechas por nicolas halperin"
 								/>
 							</a>

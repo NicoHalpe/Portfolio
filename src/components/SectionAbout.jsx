@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./SectionAbout.css";
+import useIntersectionObserver from "../useIntersectionObserver";
 
 export default function SectionAbout() {
+	const ref = useRef();
+	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
+
+	useEffect(() => {
+		if (onScreen) ref.current.classList.add("visible");
+	}, [onScreen]);
+
 	return (
-		<section id="about">
+		<section id="about" ref={ref}>
 			<div className="content">
 				<object
 					id="programming-svg"
@@ -11,7 +19,7 @@ export default function SectionAbout() {
 					data="/img/programming.svg"
 					aria-label="Foto decorativa"
 				>
-					<img height="300" width="300" data-src="/img/programming.svg" alt="Foto decorativa" />
+					<img height="300" width="300" src="/img/programming.svg" alt="Foto decorativa" />
 				</object>
 				<div className="text">
 					<h2 className="spanText">

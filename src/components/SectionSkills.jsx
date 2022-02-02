@@ -1,9 +1,22 @@
-import React from "react";
-import './SectionSkills.css'
+import React, { useEffect, useRef } from "react";
+import "./SectionSkills.css";
+import useIntersectionObserver from "../useIntersectionObserver";
 
 export default function SectionSkills() {
+	const ref = useRef();
+	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
+	useEffect(() => {
+		let tilt = document.createElement("script");
+		tilt.src = "tilt.min.js";
+		document.head.appendChild(tilt);
+	}, []);
+
+	useEffect(() => {
+		if (onScreen) ref.current.classList.add("visible");
+	}, [onScreen]);
+
 	return (
-		<section id="skills">
+		<section id="skills" ref={ref}>
 			<h2 className="spanText">
 				<span>H</span>
 				<span>a</span>
@@ -21,7 +34,7 @@ export default function SectionSkills() {
 				<div className="card">
 					<div className="header">
 						<img
-							data-src="img/back.svg"
+							src="img/back.svg"
 							alt="back end logo"
 							title="back end logo"
 							height="52px"
@@ -52,7 +65,7 @@ export default function SectionSkills() {
 				<div className="card">
 					<div className="header">
 						<img
-							data-src="img/front.svg"
+							src="img/front.svg"
 							alt="front end logo"
 							title="front end logo"
 							height="52px"
@@ -84,7 +97,7 @@ export default function SectionSkills() {
 				<div className="card">
 					<div className="header">
 						<img
-							data-src="img/software.svg"
+							src="img/software.svg"
 							alt="software logo"
 							title="software logo"
 							height="52px"
