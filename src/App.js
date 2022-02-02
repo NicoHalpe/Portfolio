@@ -13,46 +13,7 @@ const SectionProyects = lazy(() => import("./components/SectionProyects"));
 const SectionContact = lazy(() => import("./components/SectionContact"));
 
 function App() {
-	const [images, setImages] = useState();
-	const startCard = 3;
-	const [cardWidth, setCardWidth] = useState();
-	const [mobileDif, setMobileDif] = useState(0);
 	useEffect(() => {
-		setImages(document.querySelector("#proyects .cards"));
-
-		const onResize = (e) => {
-			let cw;
-			let mb;
-			if (window.innerWidth < 1000) {
-				setCardWidth(window.innerWidth * 0.8 + 10);
-				cw = window.innerWidth * 0.8 + 10;
-				setMobileDif(window.innerWidth * 0.1);
-				mb = window.innerWidth * 0.1;
-			} else {
-				setCardWidth(460);
-				cw = 460;
-				setMobileDif(0);
-				mb = 0;
-			}
-
-			if (images) images.style.transform = `translate(-${startCard * cw - mb}px)`;
-		};
-		window.addEventListener("resize", onResize);
-
-		return () => {
-			window.removeEventListener("resize", onResize);
-		};
-	}, [images, cardWidth, startCard, mobileDif]);
-
-	useEffect(() => {
-		if (window.innerWidth < 1000) {
-			setCardWidth(window.innerWidth * 0.8 + 10);
-			setMobileDif(window.innerWidth * 0.1);
-		} else {
-			setCardWidth(460);
-			setMobileDif(0);
-		}
-
 		document.querySelectorAll("a").forEach((el) => {
 			el.addEventListener("click", (e) => {
 				const href = el.getAttribute("href");
@@ -79,7 +40,7 @@ function App() {
 				<SectionSkills />
 			</Suspense>
 			<Suspense fallback={<section className="proyects"></section>}>
-				<SectionProyects images={images} startCard={startCard} cardWidth={cardWidth} mobileDif={mobileDif} />
+				<SectionProyects />
 			</Suspense>
 			<Suspense fallback={<section className="contact"></section>}>
 				<SectionContact />

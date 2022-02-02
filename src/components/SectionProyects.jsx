@@ -3,8 +3,12 @@ import React, { useEffect, useState, useRef } from "react";
 import "./SectionProyects.css";
 import useIntersectionObserver from "../useIntersectionObserver";
 
-export default function SectionProyects({ images, startCard, cardWidth, mobileDif }) {
+export default function SectionProyects() {
 	const [originals, setOriginals] = useState([]);
+	const [images, setImages] = useState();
+	const startCard = 3;
+	const [cardWidth, setCardWidth] = useState();
+	const [mobileDif, setMobileDif] = useState(0);
 	const ref = useRef();
 	const onScreen = useIntersectionObserver(ref, { rootMargin: "-150px" });
 
@@ -60,9 +64,7 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 			images.style.transform = `translate(-${currentCard * cardWidth - mobileDif}px)`;
 			for (var i = 0; i < dif; i++) {
 				const clone = originals[currentOriginalPos].cloneNode(true);
-				const clE = images.appendChild(clone);
-				clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("src");
-				clE.getElementsByTagName("img")[0].removeAttribute("src");
+				images.appendChild(clone);
 				currentOriginalPos += 1;
 				if (currentOriginalPos > originals.length - 1) {
 					currentOriginalPos = currentOriginalPos - originals.length;
@@ -101,9 +103,7 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 
 			for (var i = 0; i < dif; i++) {
 				const clone = originals[currentOriginalNeg].cloneNode(true);
-				const clE = images.insertBefore(clone, images.children[0]);
-				clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("src");
-				clE.getElementsByTagName("img")[0].removeAttribute("src");
+				images.insertBefore(clone, images.children[0]);
 				currentOriginalNeg += 1;
 				if (currentOriginalNeg > originals.length) {
 					currentOriginalNeg = currentOriginalNeg - originals.length;
@@ -126,13 +126,42 @@ export default function SectionProyects({ images, startCard, cardWidth, mobileDi
 			}, 500);
 		};
 
+		const onResize = (e) => {
+			let cw;
+			let mb;
+			if (window.innerWidth < 1000) {
+				setCardWidth(window.innerWidth * 0.8 + 10);
+				cw = window.innerWidth * 0.8 + 10;
+				setMobileDif(window.innerWidth * 0.1);
+				mb = window.innerWidth * 0.1;
+			} else {
+				setCardWidth(460);
+				cw = 460;
+				setMobileDif(0);
+				mb = 0;
+			}
+
+			if (images) images.style.transform = `translate(-${startCard * cw - mb}px)`;
+		};
+		window.addEventListener("resize", onResize);
+
 		return () => {
 			images.removeEventListener("mousedown", onMouseDown);
 			images.removeEventListener("swiped", onSwipe);
+			window.removeEventListener("resize", onResize);
 		};
 	}, [images, cardWidth, mobileDif]);
 
 	useEffect(() => {
+		setImages(document.querySelector("#proyects .cards"));
+
+		if (window.innerWidth < 1000) {
+			setCardWidth(window.innerWidth * 0.8 + 10);
+			setMobileDif(window.innerWidth * 0.1);
+		} else {
+			setCardWidth(460);
+			setMobileDif(0);
+		}
 		document.querySelectorAll("#proyects .card").forEach((el) => {
 			const cl = el.cloneNode(true);
 			cl.classList.remove("visible");
