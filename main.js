@@ -27,7 +27,9 @@ function onIntersection(entries, opts) {
 
 				document
 					.querySelectorAll(
-						`${nextSectionId ? `#${nextSectionId} img[data-src], ` : ""}#${entry.target.id} img[data-src]`
+						`${nextSectionId ? `#${nextSectionId} img[data-src], ` : ""}#${
+							entry.target.id
+						} img[data-src]`
 					)
 					.forEach((element) => {
 						element.src = element.getAttribute("data-src");
@@ -180,7 +182,9 @@ const handleCardClickPos = (dif) => {
 	for (var i = 0; i < dif; i++) {
 		const clone = originals[currentOriginalPos].cloneNode(true);
 		const clE = images.appendChild(clone);
-		clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
+		clE.getElementsByTagName("img")[0].src = clE
+			.getElementsByTagName("img")[0]
+			.getAttribute("data-src");
 		clE.getElementsByTagName("img")[0].removeAttribute("data-src");
 		currentOriginalPos += 1;
 		if (currentOriginalPos > originals.length - 1) {
@@ -216,7 +220,9 @@ const handleCardClickNeg = (dif) => {
 	for (var i = 0; i < dif; i++) {
 		const clone = originals[originals.length - currentOriginalNeg].cloneNode(true);
 		const clE = images.insertBefore(clone, images.children[0]);
-		clE.getElementsByTagName("img")[0].src = clE.getElementsByTagName("img")[0].getAttribute("data-src");
+		clE.getElementsByTagName("img")[0].src = clE
+			.getElementsByTagName("img")[0]
+			.getAttribute("data-src");
 		clE.getElementsByTagName("img")[0].removeAttribute("data-src");
 		currentOriginalNeg += 1;
 		if (currentOriginalNeg > originals.length) {
@@ -243,6 +249,31 @@ const handleCardClickNeg = (dif) => {
 		currentOriginalPos = currentOriginalPos + originals.length;
 	}
 };
+
+let animating = false;
+
+const onKeyDown = (e) => {
+	if (animating) return;
+	switch (e.keyCode) {
+		case 37:
+			animating = true;
+			handleCardClickNeg(1);
+			setTimeout(() => {
+				animating = false;
+			}, 600);
+			break;
+		case 39:
+			animating = true;
+			handleCardClickPos(1);
+			setTimeout(() => {
+				animating = false;
+			}, 600);
+			break;
+		default:
+			break;
+	}
+};
+window.addEventListener("keydown", onKeyDown);
 //#endregion
 
 //#region Animated Blob
