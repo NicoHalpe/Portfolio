@@ -673,6 +673,14 @@ section *:not(h2 span) {
 	}
 }
 
+@media only screen and (max-width: 1500px) {
+	#skills .cards {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+
+	}
+}
+
 *::-webkit-scrollbar {
 	background-color: transparent;
 }
